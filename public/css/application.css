@@ -1,3 +1,9 @@
-* {
+/** {
+  outline: 1px dotted blue;
+}
+*/
+
+
+.transaction-information{
   outline: 1px dotted blue;
 }

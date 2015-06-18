@@ -23,10 +23,19 @@
       </form>
     </div>
 
-    <div class="transactions_list">
-      <div class="single-transaction">
-        <!-- <% @user_transactions %> -->
-      </div>
+    <div class="profile-transaction">
+      <h3>Here are your recent transactions</h3>
+      <ol class="transaction-list">
+        <%@user_transactions.each do |transaction|%>
+        <li>
+          <span class="transaction-information transaction-date"><%= transaction.created_at.strftime("%m-%d-%y") %></span>
+          <span class="transaction-information sender_id"><%= transaction.sender_id %></span>
+          <span class="transaction-information description"><%= transaction.description %></span>
+          <span class="transaction-information status"><%= transaction.status %></span>
+          <span class="transaction-information amount"><%= transaction.amount %></span>
+        </li>
+      <% end %>
+      </ol>
     </div>
 
   </div>

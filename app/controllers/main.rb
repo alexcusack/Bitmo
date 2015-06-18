@@ -70,7 +70,8 @@ post '/accounts' do
 end
 
 get '/profile/:username' do
-
+  get_all_user_transactions
+  chronological_sort_transactions
   erb :profile
 end
 
