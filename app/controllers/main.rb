@@ -87,14 +87,23 @@ post '/transaction' do
   p params #{"to"=>"", "amount"=>"", "Description"=>"", "pay"=>"Pay"}
   receiver = User.where(username: params[:to]).first
   transaction = Transaction.new(
-    sender_id: "#{current_user.id}",
-    receiver_id: "#{receiver.id}",
+    # sender_id: "#{current_user.id}",
+    # receiver_id: "#{receiver.id}",
     amount: params[:amount],
     description: params[:Description],
     sender_account: "#{current_user.coin_base_acct}",
     receiver_account: "#{receiver.venmo_base_acct}",
     status: "pending"
     )
+  if params[:transaction_type] == "Charge"
+    transaction.sender_id = "#{receiver.id}"
+    transaction.receiver_id = "#{current_user.id}"
+  elsif params[:transaction_type] == "Pay"
+    p 'in pay route'
+    transaction.sender_id = "#{current_user.id}"
+    transaction.receiver_id = "#{receiver.id}"
+  else
+  end
   p transaction
   if transaction.save
     redirect ("profile/#{current_user.username}")
