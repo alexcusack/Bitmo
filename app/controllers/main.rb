@@ -75,17 +75,16 @@ get '/profile/:username' do
 end
 
 
-## Eventual needs
 
 # get '/transaction/:id' do
 
 #   #from profile on clicking to explore transaction details
 # end
 
-# post '/transaction' do
-
-#   #route to run on creating new transaction
-# end
+post '/transaction' do
+  p "at POST /transaction"
+  #route to run on creating new transaction
+end
 
 
 
