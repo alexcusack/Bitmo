@@ -2,7 +2,8 @@ require 'bcrypt'
 
 class User < ActiveRecord::Base
   include BCrypt
-  has_many :transactions
+  has_many :payments, :foreign_key => 'sender_id', :class_name => 'Transaction'
+  has_many :receipts, :foreign_key => 'receiver_id', :class_name => 'Transaction'
 
   validates :first_name, :presence => true, length: { minimum: 2 }
   validates :last_name, :presence => true, length: { minimum: 2 }
