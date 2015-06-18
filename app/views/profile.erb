@@ -1,1 +1,53 @@
-hello from profile view!
+<html>
+<head>
+  <title><%= current_user.username %></title>
+  <link rel="stylesheet" type="text/css" href="../../public/css/application.css">
+</head>
+
+
+<body>
+
+  <div>
+    <div class="profile-welcome"></div>
+      <h1><%= current_user.first_name %></h1>
+    <div class="current-balance"></div>
+
+    <div class="new-transactions">
+      <h1>New Transaction</h1>
+      <form method="POST" action='/transaction'>
+        <input type="text" placeholder="To" name="to">
+        <input type="text" placeholder="Amount" name="amount">
+        <input type="text" placeholder="Description" name="Description">
+        <input type="submit" value="Pay" name="transaction_type" id="pay">
+        <input type="submit" value="Charge" name="transaction_type" id="charge">
+      </form>
+    </div>
+
+    <div class="profile-transaction">
+      <h3>Here are your recent transactions</h3>
+      <table style="width:100%" class="transaction-list">
+        <tr>
+          <th class="table-date">Date:</th>
+          <th class="table-to">To/From</th>
+          <th class="table-description">Description:</th>
+          <th class="table-status">Status</th>
+          <th class="table-amount">Amount</th>
+        </tr>
+        <%@user_transactions.each do |transaction|%>
+        <tr>
+          <td><span class="transaction-information transaction-date"><%= transaction.created_at.strftime("%m-%d-%y") %></span></td>
+          <td><span class="transaction-information sender_id"><%= transaction.sender_id %></span></td>
+          <td><span class="transaction-information description"><%= transaction.description %></span></td>
+          <td><span class="transaction-information status"><%= transaction.status %></span></td>
+          <td><span class="transaction-information amount">$<%= transaction.amount %></span></td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+
+  </div>
+  <script src="../../public/js/profile.js"></script>
+</body>
+</html>
+
+

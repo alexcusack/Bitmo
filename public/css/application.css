@@ -1,0 +1,14 @@
+
+
+.transaction-information{
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.transaction-row{
+  margin: 10px;
+}
+
+th {
+    text-align: left;
+}
