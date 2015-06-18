@@ -4,10 +4,10 @@ class User < ActiveRecord::Base
   include BCrypt
   has_many :transactions
 
-  # validates :first_name, :presence => true, length: { minimum: 2 }
-  # validates :last_name, :presence => true, length: { minimum: 2 }
-  # validates :username, :presence => true, :uniqueness => true, length: { minimum: 2 }
-  # validates :email, :presence => true, :uniqueness => true
+  validates :first_name, :presence => true, length: { minimum: 2 }
+  validates :last_name, :presence => true, length: { minimum: 2 }
+  validates :username, :presence => true, :uniqueness => true, length: { minimum: 2 }
+  validates :email, :presence => true, :uniqueness => true
   validates :password_hash, :presence => true
 
 

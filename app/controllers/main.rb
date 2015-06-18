@@ -20,14 +20,17 @@ get '/' do
 end
 
 post '/login' do
-  if @user = User.authenticate(params[:login])
-    session[:user_id] = @user.id
+  p "hitting loggin post route"
+  p params
+  if @user = User.authenticate(params[:login][:username], params[:login][:password] )
     p "login succeeded"
-    redirct "/profile/#{@current_user.username}"
+    session[:user_id] = @user.id
+    p "#{current_user.username}"
+    redirect "/profile/#{current_user.username}"
   else
+    p "hitting else"
     @errors = @user.errors
     erb :index
-  #redirect to /profile/:username
   end
 end
 
