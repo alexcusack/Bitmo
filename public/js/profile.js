@@ -23,6 +23,20 @@ var makePayment = function(){
   var toPerson = $('.to-field').val()
   var amount = $('.amount-field').val()
   var description = $('.description-field').val()
+
+  var request = $.ajax({
+      url: action,
+      type: method,
+      data: {to: toPerson,
+             amount: amount,
+             description: description,
+            },
+      dataType: 'JSON'
+    });
+
+
+
+
 };
 
 
