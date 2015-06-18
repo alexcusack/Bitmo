@@ -13,10 +13,15 @@
 
 
 get '/' do
-  p "[LOG] you're on the index page"
-  erb :index
-  #login POST /login
-  #signup POST /user/new
+  p "top of index"
+  if current_user
+    p "inside current user"
+    p current_user
+    redirect "/profile/#{current_user.username}"
+  else
+    p "inside else"
+    erb :index
+  end
 end
 
 post '/login' do
@@ -46,11 +51,8 @@ post '/signup' do
       redirect "/accounts/setup"
       p "inside errors"
     end
-    # erb :index
   end
-  # @errors = ["Make sure you fill out all the fields"]
   @errors = new_user.errors
-  p "FAIL exiting route"
   erb :index
 end
 
