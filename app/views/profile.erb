@@ -25,20 +25,29 @@
 
     <div class="profile-transaction">
       <h3>Here are your recent transactions</h3>
-      <ol class="transaction-list">
+      <table style="width:100%" class="transaction-list">
+        <tr>
+          <th class="table-date">Date:</th>
+          <th class="table-to">To/From</th>
+          <th class="table-description">Description:</th>
+          <th class="table-status">Status</th>
+          <th class="table-amount">Amount</th>
+        </tr>
         <%@user_transactions.each do |transaction|%>
-        <li>
-          <span class="transaction-information transaction-date"><%= transaction.created_at.strftime("%m-%d-%y") %></span>
-          <span class="transaction-information sender_id"><%= transaction.sender_id %></span>
-          <span class="transaction-information description"><%= transaction.description %></span>
-          <span class="transaction-information status"><%= transaction.status %></span>
-          <span class="transaction-information amount"><%= transaction.amount %></span>
-        </li>
+        <tr>
+          <td><span class="transaction-information transaction-date"><%= transaction.created_at.strftime("%m-%d-%y") %></span></td>
+          <td><span class="transaction-information sender_id"><%= transaction.sender_id %></span></td>
+          <td><span class="transaction-information description"><%= transaction.description %></span></td>
+          <td><span class="transaction-information status"><%= transaction.status %></span></td>
+          <td><span class="transaction-information amount">$<%= transaction.amount %></span></td>
+        </tr>
       <% end %>
-      </ol>
+      </table>
     </div>
 
   </div>
   <script src="../../public/js/profile.js"></script>
 </body>
 </html>
+
+

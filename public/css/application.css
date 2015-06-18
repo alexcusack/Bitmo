@@ -5,5 +5,14 @@
 
 
 .transaction-information{
-  outline: 1px dotted blue;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.transaction-row{
+  margin: 10px;
+}
+
+th {
+    text-align: left;
 }
