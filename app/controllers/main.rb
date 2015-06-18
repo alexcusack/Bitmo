@@ -35,20 +35,18 @@ end
 post '/signup' do
   p "hitting sign up route"
   if params[:signup][:password_hash] == params[:verify_password]
-    p "inside password match"
-    p params.inspect
     new_user = User.new(params[:signup])
-    p "after user creation"
+    new_user.password = params[:signup][:password_hash]
     if new_user.save
       p "inside user save"
       session[:user_id] = new_user.id
       redirect "/accounts/setup"
       p "inside errors"
     end
-    @errors = new_user.errors
     # erb :index
   end
-  @errors = ["Make sure you fill out all the fields"]
+  # @errors = ["Make sure you fill out all the fields"]
+  @errors = new_user.errors
   p "FAIL exiting route"
   erb :index
 end
