@@ -84,7 +84,24 @@ end
 
 post '/transaction' do
   p "at POST /transaction"
-  #route to run on creating new transaction
+  p params #{"to"=>"", "amount"=>"", "Description"=>"", "pay"=>"Pay"}
+  receiver = User.where(username: params[:to]).first
+  transaction = Transaction.new(
+    sender_id: "#{current_user.id}",
+    receiver_id: "#{receiver.id}",
+    amount: params[:amount],
+    description: params[:Description],
+    sender_account: "#{current_user.coin_base_acct}",
+    receiver_account: "#{receiver.venmo_base_acct}",
+    status: "pending"
+    )
+  p transaction
+  if transaction.save
+    redirect ("profile/#{current_user.username}")
+  else
+    p transaction.errors
+    p "well that didnt work"
+  end
 end
 
 

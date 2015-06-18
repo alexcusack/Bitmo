@@ -6,7 +6,7 @@ require 'faker'
      last_name: Faker::Name.last_name,
      username: Faker::Internet.user_name,
      password_hash: 'banana',
-     phone_number: 'banana',
+     phone_number: "123-435-0202",
      email: Faker::Internet.email,
      coin_base_acct: "12345678",
      venmo_base_acct: "123456"
