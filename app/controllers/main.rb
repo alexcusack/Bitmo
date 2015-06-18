@@ -86,9 +86,7 @@ post '/transaction' do
   p "at POST /transaction"
   p params #{"to"=>"", "amount"=>"", "Description"=>"", "pay"=>"Pay"}
   receiver = User.where(username: params[:to]).first
-  if receiver == nil
-    redirect ("/profile/#{current_user.username}")
-  end
+  redirect ("/profile/#{current_user.username}") if receiver == nil
   transaction = Transaction.new(
     # sender_id: "#{current_user.id}",
     # receiver_id: "#{receiver.id}",
