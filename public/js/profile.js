@@ -8,6 +8,7 @@ $(document).ready(function() {
    makePayment();
   });
 
+  // bind charge button
   $('#charge').on('click', function(event){
    event.preventDefault();
    console.log('charge caught')
@@ -16,7 +17,6 @@ $(document).ready(function() {
   });
 
 });
-
 
 
 // make a payment
@@ -58,8 +58,10 @@ var makePayment = function(){
     $('.transaction-row').after(htmlPrepend)
   })
 
-
-
+  request.fail(function(response){
+    console.log("FAIL")
+    console.log(response)
+  })
 
 };
 
