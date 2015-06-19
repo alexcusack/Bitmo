@@ -34,7 +34,7 @@ post '/login' do
     redirect "/profile/#{current_user.username}"
   else
     p "hitting else"
-    @errors = @user.errors
+    @errors = ["that didn't seem to work... "]
     erb :index
   end
 end
