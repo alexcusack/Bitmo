@@ -17,15 +17,12 @@
 <div class="profile-transaction">
   <h3>Here are your recent transactions</h3>
   <table style="width:100%" class="transaction-list">
-    <tr>
+    <tr class="transaction-row">
       <th class="table-date">Date:</th>
       <th class="table-to">To/From</th>
       <th class="table-description">Description:</th>
       <th class="table-status">Status</th>
       <th class="table-amount">Amount</th>
-    </tr>
-    <tr class="transaction-row">
-
     </tr>
     <%@user_transactions.each do |transaction|%>
     <tr>

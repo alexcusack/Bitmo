@@ -53,9 +53,9 @@ var makePayment = function(){
       + '<td><span class="transaction-information sender_id">'+transaction.sender_id+'</span></td>'
       + '<td><span class="transaction-information description">'+transaction.description+'</span></td>'
       + '<td><span class="transaction-information status">'+transaction.status+'</span></td>'
-      + '<td><span class="transaction-information amount">'+transaction.amount+'</span></td></tr>';
+      + '<td><span class="transaction-information amount">$'+transaction.amount+'</span></td></tr>';
 
-    $('.transaction-row').prepend(htmlPrepend)
+    $('.transaction-row').after(htmlPrepend)
   })
 
 
