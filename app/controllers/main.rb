@@ -84,19 +84,23 @@ end
 
 post '/transaction' do
   p "at POST /transaction"
-  p params #{"to"=>"", "amount"=>"", "Description"=>"", "pay"=>"Pay"}
+  p params #{"to"=>"alex", "amount"=>"22", "Description"=>"hi", "transaction_type"=>"Pay"}
   receiver = User.where(username: params[:to]).first
-  redirect ("/profile/#{current_user.username}") if receiver == nil
+
+  if receiver == nil
+    {content: "user not found"}.to_json
+  end
+
   transaction = Transaction.new(
-    # sender_id: "#{current_user.id}",
-    # receiver_id: "#{receiver.id}",
     amount: params[:amount],
-    description: params[:Description],
+    description: params[:description],
     sender_account: "#{current_user.coin_base_acct}",
     receiver_account: "#{receiver.venmo_base_acct}",
     status: "pending"
     )
+
   if params[:transaction_type] == "Charge"
+    p 'in charge route'
     transaction.sender_id = "#{receiver.id}"
     transaction.receiver_id = "#{current_user.id}"
   elsif params[:transaction_type] == "Pay"
@@ -105,24 +109,10 @@ post '/transaction' do
     transaction.receiver_id = "#{receiver.id}"
   else
   end
-  p transaction
   if transaction.save
-    redirect ("profile/#{current_user.username}")
-  else
-    p transaction.errors
-    p "well that didnt work"
+    p "transaction saved. converting to JSON"
+    content_type :json
+    transaction.to_json
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
 
