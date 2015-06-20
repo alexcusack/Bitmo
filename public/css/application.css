@@ -12,3 +12,15 @@
 th {
     text-align: left;
 }
+
+tr
+{
+  padding:0px;
+  width:100%;
+  border:1px solid #BAB1B1;
+}
+
+.row-spacing
+{
+  height: 4px;
+}

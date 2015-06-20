@@ -49,7 +49,7 @@ var makePayment = function(){
       sender_id: response['sender_id'],
     }
 
-    var htmlPrepend = '<tr><td><span class="transaction-information transaction-date">'+transaction.created_at+'</span></td>'
+    var htmlPrepend = '<tr class="row-spacing"></tr>'+'<tr><td><span class="transaction-information transaction-date">'+transaction.created_at+'</span></td>'
       + '<td><span class="transaction-information sender_id">'+transaction.sender_id+'</span></td>'
       + '<td><span class="transaction-information description">'+transaction.description+'</span></td>'
       + '<td><span class="transaction-information status">'+transaction.status+'</span></td>'
@@ -61,6 +61,11 @@ var makePayment = function(){
   request.fail(function(response){
     console.log("FAIL")
     console.log(response)
+    errors = response['errors']
+    debugger
+
+    $('.new-transactions').append('<p>'+errors+'</p>')
+
   })
 
 };

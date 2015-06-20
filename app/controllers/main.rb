@@ -84,35 +84,40 @@ end
 
 post '/transaction' do
   p "at POST /transaction"
-  p params #{"to"=>"alex", "amount"=>"22", "Description"=>"hi", "transaction_type"=>"Pay"}
   receiver = User.where(username: params[:to]).first
 
   if receiver == nil
-    {content: "user not found"}.to_json
-  end
-
-  transaction = Transaction.new(
-    amount: params[:amount],
-    description: params[:description],
-    sender_account: "#{current_user.coin_base_acct}",
-    receiver_account: "#{receiver.venmo_base_acct}",
-    status: "pending"
-    )
-
-  if params[:transaction_type] == "Charge"
-    p 'in charge route'
-    transaction.sender_id = "#{receiver.id}"
-    transaction.receiver_id = "#{current_user.id}"
-  elsif params[:transaction_type] == "Pay"
-    p 'in pay route'
-    transaction.sender_id = "#{current_user.id}"
-    transaction.receiver_id = "#{receiver.id}"
+    errors = 'user not found'
+    {content: errors}.to_json
+    status 500
   else
-  end
-  if transaction.save
-    p "transaction saved. converting to JSON"
-    content_type :json
-    transaction.to_json
+    transaction = Transaction.new(
+      amount: params[:amount],
+      description: params[:description],
+      sender_account: "#{current_user.coin_base_acct}",
+      receiver_account: "#{receiver.venmo_base_acct}",
+      status: "pending"
+      )
+
+    if params[:transaction_type] == "Charge"
+      p 'in charge route'
+      transaction.sender_id = "#{receiver.id}"
+      transaction.receiver_id = "#{current_user.id}"
+    elsif params[:transaction_type] == "Pay"
+      p 'in pay route'
+      transaction.sender_id = "#{current_user.id}"
+      transaction.receiver_id = "#{receiver.id}"
+    end
+
+    if transaction.save
+      p "transaction saved. converting to JSON"
+      content_type :json
+      transaction.to_json
+    else
+      errors = transaction.errors
+      {content: errors}.to_json
+      status 500
+    end
   end
 end
 
