@@ -1,5 +1,3 @@
-
-
 .transaction-information{
   margin-right: 5px;
   margin-left: 5px;
@@ -23,4 +21,9 @@ tr
 .row-spacing
 {
   height: 4px;
+}
+
+.profile-container
+{
+  margin: 10px;
 }

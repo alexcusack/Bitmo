@@ -62,8 +62,6 @@ var makePayment = function(){
     console.log("FAIL")
     console.log(response)
     errors = response['errors']
-    debugger
-
     $('.new-transactions').append('<p>'+errors+'</p>')
 
   })
