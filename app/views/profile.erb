@@ -2,6 +2,11 @@
   <div class="profile-welcome"></div>
     <h1><%= current_user.first_name %></h1>
   <div class="current-balance"></div>
+  <div class="search-bar">
+    <form class="search" method='GET' action='/search'>
+      <input type="text" name="query" placeholder="Seach for users">
+    </form>
+  </div>
 
   <div class="new-transactions">
     <h1>New Transaction</h1>
@@ -13,6 +18,39 @@
       <input type="submit" value="Charge" name="transaction_type" id="charge">
     </form>
   </div>
+
+  <div class="pending transaction">
+    <h3>Here are your pending transactions</h3>
+    <table style="width:100%" class="transaction-list">
+      <tr class="pending-transaction-row">
+        <th class="pending-table pending-date">Date:</th>
+        <th class="pending-table pending-to">To/From</th>
+        <th class="pending-table pending-description">Description:</th>
+        <th class="pending-table pending-status">Status</th>
+        <th class="pending-table pending-amount">Amount</th>
+        <th class="pending-table pending-amount">Accept</th>
+        <th class="pending-table pending-amount">Reject</th>
+      </tr>
+      <tr class="row-spacing"></tr>
+
+      <%@user_pending_transactions.each do |transaction|%>
+      <tr>
+        <td><span class="pending-information transaction-date"><%= transaction.created_at.strftime("%m-%d-%y") %></span></td>
+        <td><span class="pending-information sender_id"><%= transaction.sender_id %></span></td>
+        <td><span class="pending-information description"><%= transaction.description %></span></td>
+        <td><span class="pending-information status"><%= transaction.status %></span></td>
+        <td><span class="pending-information amount">$<%= transaction.amount %></span></td>
+        <form method="POST" action="/transaction/<%= transaction.id %>">
+          <input type="hidden" name="_method" value="put">
+          <td><input type="submit" class="accept-transaction" value="accept" name="choice"></td>
+          <td><input type="submit" class="reject-transaction" value="reject" name="choice"></td>
+        </form>
+      </tr>
+      <tr class="row-spacing"></tr>
+    <% end %>
+    </table>
+  </div>
+
 
   <div class="profile-transaction">
     <h3>Here are your recent transactions</h3>

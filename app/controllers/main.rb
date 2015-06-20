@@ -13,27 +13,27 @@
 
 
 get '/' do
-  p "top of index"
+  p "[LOG] top of index"
   if current_user
-    p "inside current user"
+    p "[LOG] inside current user"
     p current_user
     redirect "/profile/#{current_user.username}"
   else
-    p "inside else"
+    p "[LOG] inside else"
     erb :index
   end
 end
 
 post '/login' do
-  p "hitting loggin post route"
+  p "[LOG] hitting loggin post route"
   p params
   if @user = User.authenticate(params[:login][:username], params[:login][:password] )
-    p "login succeeded"
+    p "[LOG] login succeeded"
     session[:user_id] = @user.id
-    p "#{current_user.username}"
+    p "[LOG] #{current_user.username}"
     redirect "/profile/#{current_user.username}"
   else
-    p "hitting else"
+    p "[LOG] hitting else"
     @errors = ["that didn't seem to work... "]
     erb :index
   end
@@ -41,15 +41,15 @@ end
 
 
 post '/signup' do
-  p "hitting sign up route"
+  p "[LOG] hitting sign up route"
   if params[:signup][:password_hash] == params[:verify_password]
     new_user = User.new(params[:signup])
     new_user.password = params[:signup][:password_hash]
     if new_user.save
-      p "inside user save"
+      p "[LOG] inside user save"
       session[:user_id] = new_user.id
       redirect "/accounts/setup"
-      p "inside errors"
+      p "[LOG] inside errors"
     end
   end
   @errors = new_user.errors
@@ -65,25 +65,43 @@ get '/accounts/setup' do
 end
 
 post '/accounts' do
-
+  #hit route on account linking
   #redirect to profile/:username
 end
 
+put '/transaction/:id' do
+  p "[LOG] in transaction put route"
+  p params #"_method"=>"put", "approval-type"=>"accept", "splat"=>[], "captures"=>["158"], "id"=>"158"}
+  transaction = Transaction.find(params[:id])
+  if params[:choice] == 'accept'
+    transaction.status = 'completed'
+  else params[:choice] == 'reject'
+    transaction.status = 'rejected'
+  end
+  transaction.save
+  redirect "profile/#{current_user.username}"
+end
+
+
+
+
 get '/profile/:username' do
   get_all_user_transactions
+  get_pending_transaction
   chronological_sort_transactions
   erb :profile
 end
 
+get '/search' do
+
+end
 
 
-# get '/transaction/:id' do
 
-#   #from profile on clicking to explore transaction details
-# end
+
 
 post '/transaction' do
-  p "at POST /transaction"
+  p "[LOG] at POST /transaction"
   receiver = User.where(username: params[:to]).first
 
   if receiver == nil
@@ -111,7 +129,7 @@ post '/transaction' do
     end
 
     if transaction.save
-      p "transaction saved. converting to JSON"
+      p "[LOG] transaction saved. converting to JSON"
       content_type :json
       transaction.to_json
     else
