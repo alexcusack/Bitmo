@@ -88,7 +88,8 @@ post '/transaction' do
 
   if receiver == nil
     errors = 'user not found'
-    {content: errors}.to_json
+    content_type :json
+    errors.to_json
     status 500
   else
     transaction = Transaction.new(
@@ -115,7 +116,8 @@ post '/transaction' do
       transaction.to_json
     else
       errors = transaction.errors
-      {content: errors}.to_json
+      content_type :json
+      errors.to_json
       status 500
     end
   end
