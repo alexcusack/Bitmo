@@ -19,22 +19,30 @@ $(document).ready(function() {
   $('#accept').on('click', function(event){
     event.preventDefault();
     console.log('caught accept')
-    approveCharge();
+    var choice = "accept"
+    approveCharge(choice);
+  })
+
+  $('#reject').on('click', function(event){
+    event.preventDefault();
+    console.log('caught accept')
+    var choice = "reject"
+    approveCharge(choice);
   })
 
 
-  var approveCharge = function(){
+  var approveCharge = function(type){
     console.log('in approve charge function')
-    choice = $('.charge-choice').attr('action')
+    destination = $('.charge-choice').attr('action')
+    var choice = type
     $.ajax({
-      url: choice,
+      url: destination,
       method: "put",
-      data: {content: "accept"},
+      data: {content: choice},
       dataType: 'JSON',
 
     }).done(function(response){
         console.log("SUCCESS")
-        debugger
         var transaction = {
         created_at: response['created_at'],
         amount: response['amount'],
@@ -50,6 +58,8 @@ $(document).ready(function() {
         + '<td><span class="transaction-information amount">$'+transaction.amount+'</span></td></tr>';
 
       $('.transaction-row').after(htmlPrepend)
+
+      $('#'+$('.charge-choice').attr('data-id')).fadeOut()
 
     }).fail(function(response){
       console.log("FAIL")

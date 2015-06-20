@@ -34,13 +34,13 @@
       <tr class="row-spacing"></tr>
 
       <%@user_pending_transactions.each do |transaction|%>
-      <tr>
+      <tr id="<%=transaction.id %>">
         <td><span class="pending-information transaction-date"><%= transaction.created_at.strftime("%m-%d-%y") %></span></td>
         <td><span class="pending-information sender_id"><%= transaction.sender_id %></span></td>
         <td><span class="pending-information description"><%= transaction.description %></span></td>
         <td><span class="pending-information status"><%= transaction.status %></span></td>
         <td><span class="pending-information amount">$<%= transaction.amount %></span></td>
-        <form class="charge-choice" method="POST" action="/transaction/<%= transaction.id %>">
+        <form class="charge-choice" method="POST" action="/transaction/<%= transaction.id %>" data-id="<%= transaction.id %>">
           <input type="hidden" name="_method" value="put">
           <td><input type="submit" class="accept-transaction" value="accept" name="choice" id="accept"></td>
           <td><input type="submit" class="reject-transaction" value="reject" name="choice" id="reject"></td>
