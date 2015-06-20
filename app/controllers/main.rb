@@ -73,13 +73,16 @@ put '/transaction/:id' do
   p "[LOG] in transaction put route"
   p params #"_method"=>"put", "approval-type"=>"accept", "splat"=>[], "captures"=>["158"], "id"=>"158"}
   transaction = Transaction.find(params[:id])
-  if params[:choice] == 'accept'
+  p params[:content]
+  if params[:content] == 'accept'
     transaction.status = 'completed'
-  else params[:choice] == 'reject'
+  else params[:content] == 'reject'
     transaction.status = 'rejected'
   end
   transaction.save
-  redirect "profile/#{current_user.username}"
+  content_type :json
+  transaction.to_json
+  # redirect "profile/#{current_user.username}"
 end
 
 

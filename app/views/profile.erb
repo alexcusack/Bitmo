@@ -40,10 +40,10 @@
         <td><span class="pending-information description"><%= transaction.description %></span></td>
         <td><span class="pending-information status"><%= transaction.status %></span></td>
         <td><span class="pending-information amount">$<%= transaction.amount %></span></td>
-        <form method="POST" action="/transaction/<%= transaction.id %>">
+        <form class="charge-choice" method="POST" action="/transaction/<%= transaction.id %>">
           <input type="hidden" name="_method" value="put">
-          <td><input type="submit" class="accept-transaction" value="accept" name="choice"></td>
-          <td><input type="submit" class="reject-transaction" value="reject" name="choice"></td>
+          <td><input type="submit" class="accept-transaction" value="accept" name="choice" id="accept"></td>
+          <td><input type="submit" class="reject-transaction" value="reject" name="choice" id="reject"></td>
         </form>
       </tr>
       <tr class="row-spacing"></tr>

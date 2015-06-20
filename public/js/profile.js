@@ -16,6 +16,49 @@ $(document).ready(function() {
    makePayment();
   });
 
+  $('#accept').on('click', function(event){
+    event.preventDefault();
+    console.log('caught accept')
+    approveCharge();
+  })
+
+
+  var approveCharge = function(){
+    console.log('in approve charge function')
+    choice = $('.charge-choice').attr('action')
+    $.ajax({
+      url: choice,
+      method: "put",
+      data: {content: "accept"},
+      dataType: 'JSON',
+
+    }).done(function(response){
+        console.log("SUCCESS")
+        debugger
+        var transaction = {
+        created_at: response['created_at'],
+        amount: response['amount'],
+        description: response['description'],
+        status: response['status'],
+        sender_id: response['sender_id'],
+      }
+
+      var htmlPrepend = '<tr class="row-spacing"></tr>'+'<tr><td><span class="transaction-information transaction-date">'+transaction.created_at+'</span></td>'
+        + '<td><span class="transaction-information sender_id">'+transaction.sender_id+'</span></td>'
+        + '<td><span class="transaction-information description">'+transaction.description+'</span></td>'
+        + '<td><span class="transaction-information status">'+transaction.status+'</span></td>'
+        + '<td><span class="transaction-information amount">$'+transaction.amount+'</span></td></tr>';
+
+      $('.transaction-row').after(htmlPrepend)
+
+    }).fail(function(response){
+      console.log("FAIL")
+      debugger
+    })
+
+
+  }
+
 });
 
 
