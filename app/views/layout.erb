@@ -20,6 +20,16 @@
   <title></title>
 </head>
 <body>
+  <div class="header">
+    <div id="home">
+      <a href="/">Home</a>
+    </div>
+    <% if current_user %>
+      <div id="Sign_out">
+        <a href="/logout">Sign out</a>
+      </div>
+    <% end  %>
+  </div>
   <%= yield %>
 </body>
 </html>

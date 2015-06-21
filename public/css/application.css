@@ -27,3 +27,21 @@ tr
 {
   margin: 10px;
 }
+
+.header
+{
+  background-color: rgb(244, 244, 244);
+  height: 50px;
+  text-align: right;
+}
+
+#Sign_out
+{
+  display: inline-block;
+  text-align: right;
+}
+
+#home
+{
+  display: inline-block;
+}
