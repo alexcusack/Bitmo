@@ -16,7 +16,7 @@ helpers do
   end
 
   def get_pending_transaction
-    payments = current_user.payments.where(status: 'pending')
+    payments = current_user.payments.where(status: 'pending').where.not(sender_id: "#{current_user.id}")
     receipts = current_user.receipts.where(status: 'pending')
     @user_pending_transactions = payments + receipts
     @user_pending_transactions.sort!{|a,b| b.created_at <=> a.created_at}
