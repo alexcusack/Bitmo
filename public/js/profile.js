@@ -16,14 +16,14 @@ $(document).ready(function() {
    makePayment();
   });
 
-  $('#accept').on('click', function(event){
+  $('.accept').on('click', function(event){
     event.preventDefault();
     console.log('caught accept')
     var choice = "accept"
     approveCharge(choice);
   })
 
-  $('#reject').on('click', function(event){
+  $('.reject').on('click', function(event){
     event.preventDefault();
     console.log('caught accept')
     var choice = "reject"
@@ -60,7 +60,7 @@ $(document).ready(function() {
       $('.transaction-row').after(htmlPrepend)
 
       $('#'+$('.charge-choice').attr('data-id')).fadeOut()
-
+      debugger
     }).fail(function(response){
       console.log("FAIL")
       debugger
