@@ -33,7 +33,8 @@ $(document).ready(function() {
 
   var approveCharge = function(type){
     console.log('in approve charge function')
-    destination = $('.charge-choice').attr('action')
+    destination = $(this).attr('action')
+    debugger
     var choice = type
     $.ajax({
       url: destination,
