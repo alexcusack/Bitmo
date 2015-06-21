@@ -1,25 +1,27 @@
 <% if @errors %>
 <%= @errors.each{|error| puts error} %>
 <% end %>
-<h2>Login </h2>
 
-<div class ="login_form">
-  <form action="/login" method="post">
-    <input type="text" placeholder="username" name="login[username]"/>
-    <input type="password" placeholder="password" name="login[password]"/>
-    <input id="login_button" type="submit" value="Login">
-  </form>
-</div>
+<div class="profile-container">
+  <h2>Login </h2>
+  <div class ="login_form">
+    <form action="/login" method="post">
+      <input type="text" placeholder="username" name="login[username]"/>
+      <input type="password" placeholder="password" name="login[password]"/>
+      <input id="login_button" type="submit" value="Login">
+    </form>
+  </div>
 
-<h2>Or sign up</h2>
-<div class ="sign_up_form">
-  <form action="/signup" method="post">
-    <input type="text" placeholder="First name" name="signup[first_name]">
-    <input type="text" placeholder="Last name" name="signup[last_name]">
-    <input type="text" placeholder="Email" name="signup[email]">
-    <input type="text" placeholder="Username" name="signup[username]">
-    <input type="password" placeholder="Password" name="signup[password_hash]">
-    <input type="password" placeholder="Verify Password" name="verify_password">
-    <input id="submit_signup" type="submit" value="Signup">
-  </form>
+  <h2>Or sign up</h2>
+  <div class ="sign_up_form">
+    <form action="/signup" method="post">
+      <!-- <input type="text" placeholder="First name" name="signup[first_name]">
+      <input type="text" placeholder="Last name" name="signup[last_name]"> -->
+      <input id="signup_field" type="text" placeholder="Email" name="signup[email]">
+      <input id="signup_field" type="text" placeholder="Username" name="signup[username]">
+      <input id="signup_field" type="password" placeholder="Password" name="signup[password_hash]">
+      <input id="signup_field" type="password" placeholder="Verify Password" name="verify_password">
+      <input id="submit_signup" type="submit" value="Signup">
+    </form>
+  </div>
 </div>
