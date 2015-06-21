@@ -63,7 +63,7 @@ end
 
 put '/transaction/:id' do
   p "[LOG] in transaction put route"
-  p params #"_method"=>"put", "approval-type"=>"accept", "splat"=>[], "captures"=>["158"], "id"=>"158"}
+  p params #{"content"=>"accept", "splat"=>[], "captures"=>["112"], "id"=>"112"}
   transaction = Transaction.find(params[:id])
   p params[:content]
   if params[:content] == 'accept'

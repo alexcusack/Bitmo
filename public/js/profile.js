@@ -16,30 +16,24 @@ $(document).ready(function() {
    makePayment();
   });
 
+  // $('.accept').on('click', function(event){
+  //   event.preventDefault();
+  //   console.log('caught accept')
+  //   var choice = "accept"
+  //   approveCharge(choice);
+  // })
+
   $('.accept').on('click', function(event){
     event.preventDefault();
     console.log('caught accept')
-    var choice = "accept"
-    approveCharge(choice);
-  })
-
-  $('.reject').on('click', function(event){
-    event.preventDefault();
-    console.log('caught accept')
-    var choice = "reject"
-    approveCharge(choice);
-  })
-
-
-  var approveCharge = function(type){
-    console.log('in approve charge function')
-    destination = $(this).attr('action')
+    // var choice = "accept"
+    var row = +$(this).attr('data-id')
+    var destination = "/transaction/"+row
     debugger
-    var choice = type
     $.ajax({
       url: destination,
       method: "put",
-      data: {content: choice},
+      data: {content: $(this).attr('class')}, //'accept' or 'reject'
       dataType: 'JSON',
 
     }).done(function(response){
@@ -60,15 +54,56 @@ $(document).ready(function() {
         + '<td><span class="transaction-information amount">$'+transaction.amount+'</span></td></tr>';
 
       $('.transaction-row').after(htmlPrepend)
-
-      $('#'+$('.charge-choice').attr('data-id')).fadeOut()
+      debugger
+      $('#'+row).fadeOut();
     }).fail(function(response){
       debugger
       console.log("FAILure")
     })
 
 
-  }
+
+
+  })
+
+
+  // var approveCharge = function(type){
+  //   console.log('in approve charge function')
+  //   destination = $('.charge-choice').attr('action')
+  //   var choice = type
+  //   $.ajax({
+  //     url: destination,
+  //     method: "put",
+  //     data: {content: choice},
+  //     dataType: 'JSON',
+
+  //   }).done(function(response){
+  //       console.log("SUCCESS")
+  //       var transaction = {
+  //       created_at: response['created_at'],
+  //       amount: response['amount'],
+  //       description: response['description'],
+  //       status: response['status'],
+  //       sender_id: response['sender_id'],
+  //       transaction_type: response['transaction_type']
+  //     }
+
+  //     var htmlPrepend = '<tr class="row-spacing"></tr>'+'<tr><td><span class="transaction-information transaction-date">'+transaction.created_at+'</span></td>'
+  //       + '<td><span class="transaction-information sender_id">'+transaction.transaction_type+'</span></td>'
+  //       + '<td><span class="transaction-information description">'+transaction.description+'</span></td>'
+  //       + '<td><span class="transaction-information status">'+transaction.status+'</span></td>'
+  //       + '<td><span class="transaction-information amount">$'+transaction.amount+'</span></td></tr>';
+
+  //     $('.transaction-row').after(htmlPrepend)
+
+  //     $('#'+$('.charge-choice').attr('data-id')).fadeOut()
+  //   }).fail(function(response){
+  //     debugger
+  //     console.log("FAILure")
+  //   })
+
+
+  // }
 
 });
 
