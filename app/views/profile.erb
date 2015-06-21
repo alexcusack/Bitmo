@@ -1,12 +1,18 @@
 <div class="profile-container">
   <div class="profile-welcome"></div>
-    <h1><%= current_user.first_name %></h1>
+    <h1><%= @user.first_name %>'s Profile</h1>
   <div class="current-balance"></div>
   <div class="search-bar">
     <form class="search" method='GET' action='/search'>
       <input type="text" name="query" placeholder="Seach for users">
     </form>
   </div>
+
+  <% if @errors %>
+   <div class="errors">
+      <p><%= p @errors %></p>
+   </div>
+   <% end %>
 
   <div class="new-transactions">
     <h1>New Transaction</h1>
@@ -18,7 +24,7 @@
       <input type="submit" value="Charge" name="transaction_type" id="charge">
     </form>
   </div>
-
+<% if @user == current_user %>
   <div class="pending transaction">
     <h3>Here are your pending transactions</h3>
     <table style="width:100%" class="transaction-list">
@@ -50,10 +56,10 @@
     <% end %>
     </table>
   </div>
-
+<% end %>
 
   <div class="profile-transaction">
-    <h3>Here are your recent transactions</h3>
+    <h3>Recent transactions</h3>
     <table style="width:100%" class="transaction-list">
       <tr class="transaction-row">
         <th class="table-date">Date:</th>
