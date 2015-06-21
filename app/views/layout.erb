@@ -21,15 +21,24 @@
 </head>
 <body>
   <div class="header">
-    <div id="home">
-      <a href="/">Home</a>
-    </div>
+    <!-- <div id="home">
+      <button><a href="/">Home</a></button>
+    </div> -->
     <% if current_user %>
+      <div id="user">
+        <button><a href="/"><%= current_user.username.upcase %></a></button>
+      </div>
       <div id="Sign_out">
-        <a href="/logout">Sign out</a>
+        <button><a href="/logout">Sign out</a></button>
+      </div>
+      <% else %>
+      <div id="not_logged_in_home">
+        <h3>Welcome to Bitmo</h3>
       </div>
     <% end  %>
   </div>
+<div class="container">
   <%= yield %>
+</div>
 </body>
 </html>

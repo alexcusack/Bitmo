@@ -16,29 +16,29 @@ $(document).ready(function() {
    makePayment();
   });
 
+
   $('.accept').on('click', function(event){
     event.preventDefault();
     console.log('caught accept')
-    var choice = "accept"
-    approveCharge(choice);
+    approve(this);
   })
 
-  $('.reject').on('click', function(event){
+$('.reject').on('click', function(event){
     event.preventDefault();
     console.log('caught accept')
-    var choice = "reject"
-    approveCharge(choice);
+    approve(this);
   })
 
 
-  var approveCharge = function(type){
-    console.log('in approve charge function')
-    destination = $('.charge-choice').attr('action')
-    var choice = type
+  var approve = function(which){
+
+    var row = +$(which).attr('data-id')
+    var destination = "/transaction/"+row
+
     $.ajax({
       url: destination,
       method: "put",
-      data: {content: choice},
+      data: {content: $(which).attr('class')}, //'accept' or 'reject'
       dataType: 'JSON',
 
     }).done(function(response){
@@ -59,17 +59,21 @@ $(document).ready(function() {
         + '<td><span class="transaction-information amount">$'+transaction.amount+'</span></td></tr>';
 
       $('.transaction-row').after(htmlPrepend)
-
-      $('#'+$('.charge-choice').attr('data-id')).fadeOut()
+      $('#'+row).fadeOut();
     }).fail(function(response){
-      debugger
       console.log("FAILure")
     })
-
-
   }
 
 });
+
+
+
+
+
+
+
+
 
 
 // make a payment
