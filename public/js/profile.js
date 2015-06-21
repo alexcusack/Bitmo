@@ -49,10 +49,11 @@ $(document).ready(function() {
         description: response['description'],
         status: response['status'],
         sender_id: response['sender_id'],
+        transaction_type: response['transaction_type']
       }
 
       var htmlPrepend = '<tr class="row-spacing"></tr>'+'<tr><td><span class="transaction-information transaction-date">'+transaction.created_at+'</span></td>'
-        + '<td><span class="transaction-information sender_id">'+transaction.sender_id+'</span></td>'
+        + '<td><span class="transaction-information sender_id">'+transaction.transaction_type+'</span></td>'
         + '<td><span class="transaction-information description">'+transaction.description+'</span></td>'
         + '<td><span class="transaction-information status">'+transaction.status+'</span></td>'
         + '<td><span class="transaction-information amount">$'+transaction.amount+'</span></td></tr>';
@@ -61,7 +62,8 @@ $(document).ready(function() {
 
       $('#'+$('.charge-choice').attr('data-id')).fadeOut()
     }).fail(function(response){
-      console.log("FAIL")
+      debugger
+      console.log("FAILure")
     })
 
 
@@ -98,10 +100,12 @@ var makePayment = function(){
       description: response['description'],
       status: response['status'],
       sender_id: response['sender_id'],
+      transaction_type: response['transaction_type'],
+      message: response['message']
     }
 
     var htmlPrepend = '<tr class="row-spacing"></tr>'+'<tr><td><span class="transaction-information transaction-date">'+transaction.created_at+'</span></td>'
-      + '<td><span class="transaction-information sender_id">'+transaction.sender_id+'</span></td>'
+      + '<td><span class="transaction-information sender_id">'+transaction.transaction_type+'</span></td>'
       + '<td><span class="transaction-information description">'+transaction.description+'</span></td>'
       + '<td><span class="transaction-information status">'+transaction.status+'</span></td>'
       + '<td><span class="transaction-information amount">$'+transaction.amount+'</span></td></tr>';
@@ -118,9 +122,6 @@ var makePayment = function(){
   })
 
 };
-
-
-
 
 
 // make a charge

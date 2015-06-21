@@ -1,17 +1,3 @@
-# land on index
-# =>  if logged in redirect to home (or render home?)
-# else to login/signup page
-# =>  sign up post to user/new
-# =>  redirect home
-
-# Post route for new transaction
-# Takes transaction
-# Routes back to profile page
-
-# Get friends
-# displays list of friends for the current user
-
-
 get '/' do
   p "[LOG] top of index"
   if current_user
@@ -95,6 +81,7 @@ end
 
 
 get '/profile/:username' do
+  redirect '/' unless session[:user_id]
   if current_user.username == params[:username]
     @user = current_user
     get_all_user_transactions
@@ -142,10 +129,12 @@ post '/transaction' do
 
     if params[:transaction_type] == "Charge"
       p 'in charge route'
+      transaction.transaction_type = "Charge"
       transaction.sender_id = "#{receiver.id}"
       transaction.receiver_id = "#{current_user.id}"
     elsif params[:transaction_type] == "Pay"
-      p 'in pay route'
+      transaction.transaction_type = "Payment"
+      transaction.status = "Complete"
       transaction.sender_id = "#{current_user.id}"
       transaction.receiver_id = "#{receiver.id}"
     end
