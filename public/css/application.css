@@ -55,6 +55,13 @@ tr
   margin: 3px;
 }
 
+.login_form
+{
+  display: block;
+  margin: 3px;
+}
+
+
 #Sign_out
 {
   display: inline-block;
