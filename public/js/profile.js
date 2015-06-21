@@ -60,10 +60,8 @@ $(document).ready(function() {
       $('.transaction-row').after(htmlPrepend)
 
       $('#'+$('.charge-choice').attr('data-id')).fadeOut()
-      debugger
     }).fail(function(response){
       console.log("FAIL")
-      debugger
     })
 
 
