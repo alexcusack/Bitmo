@@ -97,7 +97,7 @@ end
 
 post '/transactions' do
   receiver = User.where(username: params[:to]).first
-
+  p params
   if receiver.nil?
     status 400
     return "unable to find user: #{params[:to].inspect}"
@@ -136,6 +136,6 @@ post '/transactions' do
     content_type :json
     {
       transaction: transaction.to_json(methods: [:errors]),
-    }
+    }.to_json
   end
 end
