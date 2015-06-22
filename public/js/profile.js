@@ -97,8 +97,6 @@ $('.reject').on('click', function(event){
       errors = response['errors']
       $('.new-transactions').append('<p>'+errors+'</p>')
     })
-
   };
-
 
 }); //end doc ready
