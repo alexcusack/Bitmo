@@ -13,13 +13,13 @@ class User < ActiveRecord::Base
 
 
   def self.authenticate(username, entered_password)
-      user = User.where(username: username).first
-      if user && user.password == entered_password
-        return user
-      else
-        return nil
-      end
+    user = User.where(username: username).first
+    if user && user.password == entered_password
+      return user
+    else
+      return nil
     end
+  end
 
   def password
     @password ||= Password.new(password_hash)
