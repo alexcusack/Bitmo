@@ -26,7 +26,7 @@ post '/signup' do
     new_user.password = params[:signup][:password_hash]
     if new_user.save
       session[:user_id] = new_user.id
-      redirect "/accounts/setup"
+      redirect "/account/setup"
     end
   end
   @errors = new_user.errors
@@ -43,7 +43,7 @@ end
 
 
 
-get '/accounts/setup' do
+get '/account/setup' do
   erb :account_setup
 end
 
@@ -95,7 +95,7 @@ end
 
 
 
-post '/transactions/new' do
+post '/transactions' do
   receiver = User.where(username: params[:to]).first
   transaction = Transaction.new(
     amount: params[:amount],

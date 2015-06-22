@@ -17,25 +17,25 @@ $(document).ready(function() {
   $('.accept').on('click', function(event){
     event.preventDefault();
     console.log('caught accept')
-    approve(this);
+    approve.call(this);
   })
 
-$('.reject').on('click', function(event){
+  $('.reject').on('click', function(event){
     event.preventDefault();
     console.log('caught accept')
-    approve(this);
+    approve.call(this);
   })
 
 
-  var approve = function(which){
+  var approve = function(){
 
-    var row = +$(which).attr('data-id')
-    // var destination = "/transaction/"+row
+    console.log(this) // used with approve.call()
+    var row = $(this).attr('data-id')
 
     $.ajax({
       url: "/transaction/"+row,
       method: "put",
-      data: {content: $(which).attr('class')}, //'accept' or 'reject'
+      data: {content: $(this).attr('class')}, //'accept' or 'reject'
       dataType: 'JSON',
 
     }).done(function(response){
@@ -74,6 +74,7 @@ $('.reject').on('click', function(event){
                transaction_type: transactionType,
               },
         dataType: 'JSON'
+
       }).done(function(response){
         var transaction = {
         created_at: response['created_at'],
