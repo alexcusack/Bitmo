@@ -1,15 +1,16 @@
 $(document).ready(function() {
 
-  $('#pay').on('click', function(event){
-    event.preventDefault();
-    console.log('pay caught')
-    makePayment($(this).closest('form'), "Pay");
+
+  $('.create-transaction input[type=submit]').on('click', function(event){
+    var submitButton = $(this);
+    submitButton.closest('form').find('input[name=transaction_type]').val(submitButton.val());
   });
 
-  $('#charge').on('click', function(event){
+  $('.create-transaction').on('submit', function(event){
     event.preventDefault();
-    console.log('charge caught')
-    makePayment($(this).closest('form'), 'Charge');
+    var form = $(this).closest('form');
+    makePayment(form);
+    form.find('input[name=transaction_type]').val('Pay');
   });
 
   $('.accept').on('click', function(event){
@@ -65,12 +66,12 @@ $(document).ready(function() {
   }
 
 
-  var makePayment = function(form, transactionType){
+  var makePayment = function(form){
 
     var request = $.ajax({
       url: form.attr('action'),
       type: form.attr('method'),
-      data: form.serialize()+'&transaction_type='+transactionType,
+      data: form.serialize(),
       dataType: 'JSON',
     });
 
