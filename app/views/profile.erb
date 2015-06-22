@@ -1,6 +1,7 @@
 <div class="profile-container">
+
   <div class="profile-welcome"></div>
-    <h1><%= @user.first_name %>'s Profile</h1>
+    <h1><%= @user.username %>'s Profile</h1>
   <div class="current-balance"></div>
   <div class="search-bar">
     <form class="search" method='GET' action='/search'>
@@ -16,7 +17,7 @@
 
   <div class="new-transactions">
     <h1>New Transaction</h1>
-    <form method="POST" action='/transaction' class="create-transaction">
+    <form method="POST" action='/transactions/new' class="create-transaction">
       <input type="text" placeholder="To" name="to" class="to-field">
       <input type="text" placeholder="Amount" name="amount" class="amount-field">
       <input type="text" placeholder="Description" name="Description" class="description-field">
@@ -40,19 +41,9 @@
       <tr class="row-spacing"></tr>
 
       <%@user_pending_transactions.each do |transaction|%>
-      <tr id="<%=transaction.id %>" data-id="<%= transaction.id %>">
-        <td><span class="pending-information transaction-date"><%= transaction.created_at.strftime("%m-%d-%y") %></span></td>
-        <td><span class="pending-information sender_id"><%= transaction.transaction_type %></span></td>
-        <td><span class="pending-information description"><%= transaction.description %></span></td>
-        <td><span class="pending-information status"><%= transaction.status %></span></td>
-        <td><span class="pending-information amount">$<%= transaction.amount %></span></td>
-        <form class="charge-choice" method="POST" action="/transaction/<%= transaction.id %>" data-id="<%= transaction.id %>">
-          <input type="hidden" name="_method" value="put">
-          <td class="accept"><input type="submit" class="accept-transaction" value="accept" name="choice" ></td>
-          <td class="reject"><input type="submit" class="reject-transaction" value="reject" name="choice" ></td>
-        </form>
-      </tr>
-      <tr class="row-spacing"></tr>
+
+       <%= erb :'_pending_transactions_row', :layout => false, :locals => {:transaction => transaction }%>
+
     <% end %>
     </table>
   </div>
@@ -69,15 +60,11 @@
         <th class="table-amount">Amount</th>
       </tr>
       <tr class="row-spacing"></tr>
+
       <%@user_transactions.each do |transaction|%>
-      <tr>
-        <td><span class="transaction-information transaction-date"><%= transaction.created_at.strftime("%m-%d-%y") %></span></td>
-        <td><span class="transaction-information sender_id"><%= transaction.transaction_type %></span></td>
-        <td><span class="transaction-information description"><%= transaction.description %></span></td>
-        <td><span class="transaction-information status"><%= transaction.status %></span></td>
-        <td><span class="transaction-information amount">$<%= transaction.amount %></span></td>
-      </tr>
-      <tr class="row-spacing"></tr>
+
+       <%= erb :'_transaction_row', :layout => false, :locals => {:transaction => transaction }%>
+
     <% end %>
     </table>
   </div>

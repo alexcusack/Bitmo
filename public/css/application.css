@@ -18,6 +18,14 @@ tr
   border:1px solid #BAB1B1;
 }
 
+#not_logged_in_home
+{
+  margin: 0px;
+  text-align: center;
+  vertical-align: center;
+  padding-top: 1px;
+}
+
 .row-spacing
 {
   height: 4px;
@@ -25,15 +33,34 @@ tr
 
 .profile-container
 {
-  margin: 10px;
+  margin: 20px auto;
+  /*margin-top: -20px;*/
+  background-color: white;
+  width: 1000px;
+  padding: 0px 20px 20px 20px;
+  border: 1px dotted black;
+  /*height: 100vh;*/
 }
 
 .header
 {
-  background-color: rgb(244, 244, 244);
+  background-color: rgb(33, 137, 168);
   height: 50px;
   text-align: right;
 }
+
+#signup_field
+{
+  display: block;
+  margin: 3px;
+}
+
+.login_form
+{
+  display: block;
+  margin: 3px;
+}
+
 
 #Sign_out
 {
@@ -44,4 +71,35 @@ tr
 #home
 {
   display: inline-block;
+  float: left;
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+#user
+{
+  display: inline-block;
+  padding-top: 10px;
+}
+#Sign_out
+{
+ padding-right: 5px;
+}
+
+.container {
+  background-color: rgb(234, 234, 234);
+}
+
+#venmo
+{
+  display: block;
+}
+
+#coinbase{
+  display: block;
+}
+
+body
+{
+  background-color: rgb(234, 234, 234);
 }

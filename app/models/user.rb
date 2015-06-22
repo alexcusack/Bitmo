@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
   has_many :payments, :foreign_key => 'sender_id', :class_name => 'Transaction'
   has_many :receipts, :foreign_key => 'receiver_id', :class_name => 'Transaction'
 
-  validates :first_name, :presence => true, length: { minimum: 2 }
-  validates :last_name, :presence => true, length: { minimum: 2 }
-  validates :username, :presence => true, :uniqueness => true, length: { minimum: 2 }
+  # validates :first_name, :presence => true, length: { minimum: 2 }
+  # validates :last_name, :presence => true, length: { minimum: 2 }
+  validates :username, :uniqueness => true, length: { minimum: 2 }
   validates :email, :presence => true, :uniqueness => true
   validates :password_hash, :presence => true
 
