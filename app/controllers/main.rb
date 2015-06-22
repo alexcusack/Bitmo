@@ -97,16 +97,22 @@ end
 
 post '/transactions' do
   receiver = User.where(username: params[:to]).first
+
+  if receiver.nil?
+    status 400
+    return "unable to find user: #{params[:to].inspect}"
+  end
+
   transaction = Transaction.new(
     amount: params[:amount],
     description: params[:description],
-    sender_id: "#{current_user.id}",
-    receiver_id: "#{receiver.id}",
+    sender_id: current_user.id,
+    receiver_id: receiver.id,
     sender_account: "#{current_user.coin_base_acct}",
     receiver_account: "#{receiver.venmo_base_acct}",
     status: "complete",
-    transaction_type: params[:transaction_type]
-    )
+    transaction_type: params[:transaction_type],
+  )
 
   if params[:transaction_type] == "Charge"
     transaction.sender_id = "#{receiver.id}"
@@ -116,12 +122,20 @@ post '/transactions' do
 
   if transaction.save
     content_type :json
-    transaction.to_json
+    html = if transaction.pending?
+      erb :'_pending_transactions_row', layout: false, locals: {transaction: transaction}
+    else
+      erb :'_transaction_row', layout: false, locals: {transaction: transaction}
+    end
+    {
+      pending: transaction.pending?,
+      html: html,
+    }.to_json
   else
-    p transaction.errors
-    errors = transaction.errors
-    content_type :json
-    errors.to_json
     status 500
+    content_type :json
+    {
+      transaction: transaction.to_json(methods: [:errors]),
+    }
   end
 end
