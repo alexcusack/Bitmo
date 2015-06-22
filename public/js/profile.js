@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-  // bind pay button
   $('#pay').on('click', function(event){
    event.preventDefault();
    console.log('pay caught')
@@ -8,14 +7,12 @@ $(document).ready(function() {
    makePayment();
   });
 
-  // bind charge button
   $('#charge').on('click', function(event){
    event.preventDefault();
    console.log('charge caught')
    transactionType= "Charge"
    makePayment();
   });
-
 
   $('.accept').on('click', function(event){
     event.preventDefault();
@@ -33,10 +30,10 @@ $('.reject').on('click', function(event){
   var approve = function(which){
 
     var row = +$(which).attr('data-id')
-    var destination = "/transaction/"+row
+    // var destination = "/transaction/"+row
 
     $.ajax({
-      url: destination,
+      url: "/transaction/"+row,
       method: "put",
       data: {content: $(which).attr('class')}, //'accept' or 'reject'
       dataType: 'JSON',
@@ -66,12 +63,6 @@ $('.reject').on('click', function(event){
   }
 
 });
-
-
-
-
-
-
 
 
 
@@ -129,10 +120,10 @@ var makePayment = function(){
 
 
 // make a charge
-var makeCharge = function(){
-  var action = $('.create-transaction').attr('action');
-  var method = $('.create-transaction').attr('method');
-  var toPerson = $('.to-field').val()
-  var amount = $('.amount-field').val()
-  var description = $('.description-field').val()
-};
+// var makeCharge = function(){
+//   var action = $('.create-transaction').attr('action');
+//   var method = $('.create-transaction').attr('method');
+//   var toPerson = $('.to-field').val()
+//   var amount = $('.amount-field').val()
+//   var description = $('.description-field').val()
+// };
