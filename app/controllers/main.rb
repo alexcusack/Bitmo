@@ -95,7 +95,7 @@ end
 
 
 
-post '/transaction' do
+post '/transactions/new' do
   receiver = User.where(username: params[:to]).first
   transaction = Transaction.new(
     amount: params[:amount],

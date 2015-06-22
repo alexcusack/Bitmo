@@ -1,4 +1,5 @@
 <div class="profile-container">
+
   <div class="profile-welcome"></div>
     <h1><%= @user.first_name %>'s Profile</h1>
   <div class="current-balance"></div>
@@ -16,7 +17,7 @@
 
   <div class="new-transactions">
     <h1>New Transaction</h1>
-    <form method="POST" action='/transaction' class="create-transaction">
+    <form method="POST" action='/transactions/new' class="create-transaction">
       <input type="text" placeholder="To" name="to" class="to-field">
       <input type="text" placeholder="Amount" name="amount" class="amount-field">
       <input type="text" placeholder="Description" name="Description" class="description-field">
