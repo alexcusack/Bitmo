@@ -32,34 +32,40 @@ $(document).ready(function() {
     console.log(this) // used with approve.call()
     var row = $(this).attr('data-id')
 
-    $.ajax({
+    var request = $.ajax({
       url: "/transaction/"+row,
       method: "put",
       data: {content: $(this).attr('class')}, //'accept' or 'reject'
       dataType: 'JSON',
+    });
 
-    }).done(function(response){
-        console.log("SUCCESS")
-        var transaction = {
-        created_at: response['created_at'],
-        amount: response['amount'],
-        description: response['description'],
-        status: response['status'],
-        sender_id: response['sender_id'],
-        transaction_type: response['transaction_type']
-      }
+    request.done(function(response){
+      console.log("SUCCESS")
 
-      var htmlPrepend = '<tr class="row-spacing"></tr>'+'<tr><td><span class="transaction-information transaction-date">'+transaction.created_at+'</span></td>'
-        + '<td><span class="transaction-information sender_id">'+transaction.transaction_type+'</span></td>'
-        + '<td><span class="transaction-information description">'+transaction.description+'</span></td>'
-        + '<td><span class="transaction-information status">'+transaction.status+'</span></td>'
-        + '<td><span class="transaction-information amount">$'+transaction.amount+'</span></td></tr>';
+      // var transaction = {
+      //   created_at: response['created_at'],
+      //   amount: response['amount'],
+      //   description: response['description'],
+      //   status: response['status'],
+      //   sender_id: response['sender_id'],
+      //   transaction_type: response['transaction_type']
+      // }
 
-      $('.transaction-row').after(htmlPrepend)
-      $('#'+row).fadeOut();
-    }).fail(function(response){
+      // var htmlPrepend = '<tr class="row-spacing"></tr>'+'<tr><td><span class="transaction-information transaction-date">'+transaction.created_at+'</span></td>'
+      //   + '<td><span class="transaction-information sender_id">'+transaction.transaction_type+'</span></td>'
+      //   + '<td><span class="transaction-information description">'+transaction.description+'</span></td>'
+      //   + '<td><span class="transaction-information status">'+transaction.status+'</span></td>'
+      //   + '<td><span class="transaction-information amount">$'+transaction.amount+'</span></td></tr>';
+
+      // $('.transaction-row').after(htmlPrepend)
+      // $('#'+row).fadeOut();
+    });
+
+
+    request.fail(function(response){
       console.log("FAILure")
-    })
+    });
+
   }
 
 

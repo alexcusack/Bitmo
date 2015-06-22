@@ -111,6 +111,3 @@ DEPENDENCIES
   shoulda-matchers
   sinatra
   sinatra-contrib
-
-BUNDLED WITH
-   1.10.4
