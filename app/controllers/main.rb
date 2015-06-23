@@ -122,11 +122,7 @@ post '/transactions' do
 
   if transaction.save
     content_type :json
-    html = if transaction.pending?
-      erb :'_pending_transactions_row', layout: false, locals: {transaction: transaction}
-    else
-      erb :'_transaction_row', layout: false, locals: {transaction: transaction}
-    end
+    html = erb :'_transaction_row', layout: false, locals: {transaction: transaction}
     {
       pending: transaction.pending?,
       html: html,

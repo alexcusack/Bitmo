@@ -3,13 +3,24 @@
   margin-left: 5px;
 }
 
-.transaction-row{
+.transaction-row
+{
   margin: 10px;
 }
 
-th {
+th
+{
     text-align: left;
 }
+
+
+tbody:before {
+    content: "-";
+    display: block;
+    line-height: .2px;
+    color: transparent;
+}
+
 
 tr
 {

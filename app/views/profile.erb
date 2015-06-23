@@ -42,7 +42,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="row-spacing"></tr>
+        <!-- <tr class="row-spacing"></tr> -->
 
         <%@user_pending_transactions.each do |transaction|%>
           <%= erb :'_pending_transactions_row', :locals => {:transaction => transaction }%>
@@ -55,7 +55,7 @@
   <div class="profile-transaction">
     <h3>Recent transactions</h3>
     <table style="width:100%" class="transaction-list completed-transactions-table">
-      <thead>
+      <thead class='table-head'>
         <tr class="transaction-row">
           <th class="table-date">Date:</th>
           <th class="table-to">Type</th>
@@ -65,7 +65,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="row-spacing"></tr>
+        <!-- <tr class="row-spacing"></tr> -->
         <% @user_transactions.each do |transaction| %>
           <%= erb :'_transaction_row', :locals => {:transaction => transaction }%>
         <% end %>

@@ -76,12 +76,8 @@ $(document).ready(function() {
     });
 
     request.done(function(response){
-      var table;
-      if (response.pending){
-        table = $('.pending-transactions-table tbody');
-      }else{
-        table = $('.completed-transactions-table tbody');
-      }
+      var table = $('.completed-transactions-table tbody');
+
       table.prepend(response.html);
     });
 
