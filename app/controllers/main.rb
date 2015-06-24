@@ -9,7 +9,7 @@ end
 
 
 post '/login' do
-  if @user = User.authenticate(params[:login][:username], params[:login][:password] )
+  if @user = User.authenticate(params[:login][:username], params[:login][:password])
     session[:user_id] = @user.id
     redirect "/profile/#{current_user.username}"
   else
