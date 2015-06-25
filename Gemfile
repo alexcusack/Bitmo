@@ -16,7 +16,10 @@ gem 'pry-byebug'
 gem 'faker'
 gem 'bcrypt'
 
+
 gem 'shotgun'
+
+gem 'dotenv'
 
 group :test do
   gem 'shoulda-matchers'

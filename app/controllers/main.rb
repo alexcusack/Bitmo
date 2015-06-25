@@ -1,3 +1,22 @@
+require 'dotenv'
+Dotenv.load
+get '/signup-with-coinbase' do
+  coinbase_secret = ENV['COINBASE_CLIENT_SECRET']
+  coinbase_ID = ENV['COINBASE_CLIENT_ID']
+  p coinbase_secret
+  p coinbase_ID
+end
+
+
+get '/coinbase-oauth' do
+  #token = param[:code]
+  ## store token as user attribute?
+end
+
+
+
+
+
 get '/' do
   if current_user
     redirect "/profile/#{current_user.username}"
