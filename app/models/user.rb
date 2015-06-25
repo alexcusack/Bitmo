@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # validates :last_name, :presence => true, length: { minimum: 2 }
   validates :username, :uniqueness => true, length: { minimum: 2 }
   validates :email, :presence => true, :uniqueness => true
-  validates :password_hash, :presence => true
+  # validates :password_hash, :presence => true
 
 
   def self.authenticate(username, entered_password)

@@ -5,9 +5,11 @@ ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 
 require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
-# Require gems we care about
-require 'rubygems'
+require 'dotenv'
 
+Dotenv.load
+
+require 'oauth2'
 require 'uri'
 require 'pathname'
 
@@ -17,6 +19,7 @@ require 'logger'
 
 require 'sinatra'
 require "sinatra/reloader" if development?
+require 'pry-byebug' if development?
 
 require 'erb'
 
