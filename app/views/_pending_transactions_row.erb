@@ -5,10 +5,19 @@
   <td><span><%= transaction.status %></span></td>
   <td><span>$<%= transaction.amount %></span></td>
 
-  <form id="<%= transaction.id %>" class="charge-choice" method="POST" action="/transaction/<%= transaction.id %>" data-id="<%= transaction.id %>">
-    <input type="hidden" name="_method" value="put">
-    <td class="accept" data-id="<%= transaction.id %>"><input type="submit" class="accept-transaction" value="accept" name="choice" ></td>
-    <td class="reject" data-id="<%= transaction.id %>"><input data-id="<%= transaction.id %>" type="submit" class="reject-transaction" value="reject" name="choice" ></td>
+
+  <td class="accept" data-id="<%= transaction.id %>">
+    <form id="<%= transaction.id %>" class="charge-choice" method="POST" action="/transaction/<%= transaction.id %>" data-id="<%= transaction.id %>">
+      <input type="hidden" name="_method" value="put" />
+      <input type="submit" class="accept-transaction" value="accept" name="choice" />
+    </form>
+  </td>
+  <td class="reject" data-id="<%= transaction.id %>">
+    <form id="<%= transaction.id %>" class="charge-choice" method="POST" action="/transaction/<%= transaction.id %>" data-id="<%= transaction.id %>">
+      <input type="hidden" name="_method" value="put" />
+      <input data-id="<%= transaction.id %>" type="submit" class="reject-transaction" value="reject" name="choice" />
+    </form>
+  </td>
   </form>
 </tr>
 

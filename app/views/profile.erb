@@ -17,55 +17,59 @@
 
   <div class="new-transactions">
     <h1>New Transaction</h1>
-    <form method="POST" action='/transactions' class="create-transaction">
-      <input type="text" placeholder="To" name="to" class="to-field">
-      <input type="text" placeholder="Amount" name="amount" class="amount-field">
-      <input type="text" placeholder="Description" name="Description" class="description-field">
-      <input type="submit" value="Pay" name="transaction_type" id="pay">
-      <input type="submit" value="Charge" name="transaction_type" id="charge">
+    <form method="POST" action="/transactions" class="create-transaction">
+      <input type="text" placeholder="To" name="to" class="to-field" />
+      <input type="text" placeholder="Amount" name="amount" class="amount-field" />
+      <input type="text" placeholder="Description" name="description" class="description-field" />
+      <input type="hidden" name="transaction_type" />
+      <input type="submit" value="Pay" />
+      <input type="submit" value="Charge" />
     </form>
   </div>
 <% if @user == current_user %>
   <div class="pending transaction">
     <h3>Here are your pending transactions</h3>
-    <table style="width:100%" class="transaction-list">
-      <tr class="pending-transaction-row">
-        <th class="pending-table pending-date">Date:</th>
-        <th class="pending-table pending-to">Type</th>
-        <th class="pending-table pending-description">Description:</th>
-        <th class="pending-table pending-status">Status</th>
-        <th class="pending-table pending-amount">Amount</th>
-        <th class="pending-table pending-amount">Accept</th>
-        <th class="pending-table pending-amount">Reject</th>
-      </tr>
-      <tr class="row-spacing"></tr>
+    <table style="width:100%" class="transaction-list pending-transactions-table">
+      <thead>
+        <tr class="pending-transaction-row">
+          <th class="pending-table pending-date">Date:</th>
+          <th class="pending-table pending-to">Type</th>
+          <th class="pending-table pending-description">Description:</th>
+          <th class="pending-table pending-status">Status</th>
+          <th class="pending-table pending-amount">Amount</th>
+          <th class="pending-table pending-amount">Accept</th>
+          <th class="pending-table pending-amount">Reject</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr class="row-spacing"></tr> -->
 
-      <%@user_pending_transactions.each do |transaction|%>
-
-       <%= erb :'_pending_transactions_row', :layout => false, :locals => {:transaction => transaction }%>
-
-    <% end %>
+        <%@user_pending_transactions.each do |transaction|%>
+          <%= erb :'_pending_transactions_row', :locals => {:transaction => transaction }%>
+        <% end %>
+      </tbody>
     </table>
   </div>
 <% end %>
 
   <div class="profile-transaction">
     <h3>Recent transactions</h3>
-    <table style="width:100%" class="transaction-list">
-      <tr class="transaction-row">
-        <th class="table-date">Date:</th>
-        <th class="table-to">Type</th>
-        <th class="table-description">Description:</th>
-        <th class="table-status">Status</th>
-        <th class="table-amount">Amount</th>
-      </tr>
-      <tr class="row-spacing"></tr>
-
-      <%@user_transactions.each do |transaction|%>
-
-       <%= erb :'_transaction_row', :layout => false, :locals => {:transaction => transaction }%>
-
-    <% end %>
+    <table style="width:100%" class="transaction-list completed-transactions-table">
+      <thead class='table-head'>
+        <tr class="transaction-row">
+          <th class="table-date">Date:</th>
+          <th class="table-to">Type</th>
+          <th class="table-description">Description:</th>
+          <th class="table-status">Status</th>
+          <th class="table-amount">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr class="row-spacing"></tr> -->
+        <% @user_transactions.each do |transaction| %>
+          <%= erb :'_transaction_row', :locals => {:transaction => transaction }%>
+        <% end %>
+      </tbody>
     </table>
   </div>
 

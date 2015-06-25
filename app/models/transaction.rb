@@ -10,4 +10,8 @@ class Transaction < ActiveRecord::Base
   validates :status, :presence => true
   validates :amount, :presence => true
 
+  def pending?
+    status == 'pending'
+  end
+
 end
