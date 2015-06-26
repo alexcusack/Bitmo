@@ -18,12 +18,12 @@ helpers do
 
   def login_via_coinbase_token(token)
     session['coinbase_token'] = token.to_hash
-    # find or create a user
     coinbase_user_info = get_coinbase_user_info
     user = User.where(coin_base_acct: coinbase_user_info['id']).first_or_initialize
     user.username ||= coinbase_user_info['username']
     user.email    ||= coinbase_user_info['email']
-    # user.avatar_url ||= coinbase_user_info['avatar_url']
+    user.coinbase_balance ||= coinbase_user_info['balance']['amount']
+    user.avatar_url ||= coinbase_user_info['avatar_url']
     user.save or raise "unable to create user from coinbase data\n\n#{user.errors.full_messages.join("\n")}"
     session[:user_id] = user.id
   end
@@ -39,6 +39,8 @@ helpers do
     raise "Failed to load coinbase user info" unless res.status == 200
     JSON.parse(res.body)['user']
   end
+
+
 
   def current_user
     @current_user ||= User.where(id: session[:user_id]).first if session[:user_id]

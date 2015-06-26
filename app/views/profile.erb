@@ -3,6 +3,12 @@
   <div class="profile-welcome"></div>
     <h1><%= @user.username %>'s Profile</h1>
   <div class="current-balance"></div>
+  <div class="profile-picture">
+    <img src="<%= @user.avatar_url %>">
+  </div>
+  <div class="btc-balance">
+    <h3>BTC Balance: <%= @user.coinbase_balance %></h3>
+  </div>
   <div class="search-bar">
     <form class="search" method='GET' action='/search'>
       <input type="text" name="query" placeholder="Seach for users">

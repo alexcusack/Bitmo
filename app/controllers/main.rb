@@ -1,4 +1,3 @@
-
 get '/' do
   if logged_in?
     redirect "/profile/#{current_user.username}"
@@ -15,42 +14,35 @@ end
 get '/coinbase-oauth/callback' do
   code = params[:code]
   token = request_coinbase_oauth_token(code)
-  binding.pry
   login_via_coinbase_token(token)
   redirect to('/')
 end
 
 
+# post '/login' do
+#   if @user = User.authenticate(params[:login][:username], params[:login][:password])
+#     session[:user_id] = @user.id
+#     redirect "/profile/#{current_user.username}"
+#   else
+#     @errors = ["that didn't seem to work... "]
+#     erb :index
+#   end
+# end
 
 
 
-
-
-
-post '/login' do
-  if @user = User.authenticate(params[:login][:username], params[:login][:password])
-    session[:user_id] = @user.id
-    redirect "/profile/#{current_user.username}"
-  else
-    @errors = ["that didn't seem to work... "]
-    erb :index
-  end
-end
-
-
-
-post '/signup' do
-  if params[:signup][:password_hash] == params[:verify_password]
-    new_user = User.new(params[:signup])
-    new_user.password = params[:signup][:password_hash]
-    if new_user.save
-      session[:user_id] = new_user.id
-      redirect "/account/setup"
-    end
-  end
-  @errors = new_user.errors
-  erb :index
-end
+# post '/signup' do
+#   if params[:signup][:password_hash] == params[:verify_password]
+#     new_user = User.new(params[:signup])
+#     new_user.password = params[:signup][:password_hash]
+#     if new_user.save
+#       session[:user_id] = new_user.id
+#       redirect "/account/setup"
+#     end
+#   end
+#   @errors = new_user.errors
+#   erb :index
+# end
 
 
 
@@ -62,9 +54,9 @@ end
 
 
 
-get '/account/setup' do
-  erb :account_setup
-end
+# get '/account/setup' do
+#   erb :account_setup
+# end
 
 
 

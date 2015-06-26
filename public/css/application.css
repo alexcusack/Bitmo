@@ -3,13 +3,38 @@
   margin-left: 5px;
 }
 
-.transaction-row
-{
+.transaction-row{
   margin: 10px;
 }
 
-th
-{
+.profile-picture{
+  float: right;
+}
+
+.login-button {
+  background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+  background-color:#7892c2;
+  border-radius:20px;
+  display:inline-block;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:20px;
+  padding:11px 50px;
+  text-decoration:none;
+}
+
+.login-button:hover {
+  background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+  background-color:#476e9e;
+}
+
+.login-button:active {
+  position:relative;
+  top:1px;
+}
+
+
+th{
     text-align: left;
 }
 
@@ -22,28 +47,24 @@ tbody:before {
 }
 
 
-tr
-{
+tr{
   padding:0px;
   width:100%;
   border:1px solid #BAB1B1;
 }
 
-#not_logged_in_home
-{
+#not_logged_in_home{
   margin: 0px;
   text-align: center;
   vertical-align: center;
   padding-top: 1px;
 }
 
-.row-spacing
-{
+.row-spacing{
   height: 4px;
 }
 
-.profile-container
-{
+.profile-container{
   margin: 20px auto;
   /*margin-top: -20px;*/
   background-color: white;
@@ -53,47 +74,40 @@ tr
   /*height: 100vh;*/
 }
 
-.header
-{
+.header{
   background-color: rgb(33, 137, 168);
   height: 50px;
   text-align: right;
 }
 
-#signup_field
-{
+#signup_field{
   display: block;
   margin: 3px;
 }
 
-.login_form
-{
+.login_form{
   display: block;
   margin: 3px;
 }
 
-
-#Sign_out
-{
+#Sign_out{
   display: inline-block;
   text-align: right;
 }
 
-#home
-{
+#home{
   display: inline-block;
   float: left;
   padding-top: 10px;
   padding-left: 5px;
 }
 
-#user
-{
+#user{
   display: inline-block;
   padding-top: 10px;
 }
-#Sign_out
-{
+
+#Sign_out{
  padding-right: 5px;
 }
 
@@ -101,8 +115,7 @@ tr
   background-color: rgb(234, 234, 234);
 }
 
-#venmo
-{
+#venmo{
   display: block;
 }
 
@@ -110,7 +123,6 @@ tr
   display: block;
 }
 
-body
-{
+body{
   background-color: rgb(234, 234, 234);
 }
