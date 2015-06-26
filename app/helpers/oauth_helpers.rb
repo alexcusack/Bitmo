@@ -35,11 +35,20 @@ helpers do
   end
 
   def get_coinbase_user_info
-    res = coinbase_token.get('https://api.coinbase.com/v1/users/self')
-    raise "Failed to load coinbase user info" unless res.status == 200
-    JSON.parse(res.body)['user']
+    response = coinbase_token.get('https://api.coinbase.com/v1/users/self')
+    raise "Failed to load coinbase user info" unless response.status == 200
+    JSON.parse(response.body)['user']
   end
 
+  def refresh_account_balances
+    session['coinbase_token']['scope']='balance'
+    url = "https://api.coinbase.com/v1/accounts/#{current_user.coin_base_acct}/balance"
+    p url
+    response = coinbase_token.get(url)
+    raise "Failed to load coinbase BTC balance" unless response.status == 200
+    current_user.coinbase_balance = response['amount']
+    JSON.parse(response.body)
+  end
 
 
   def current_user
