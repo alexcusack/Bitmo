@@ -7,11 +7,13 @@ get '/' do
 end
 
 get '/signup-with-coinbase' do
+  p "{LOG} in sigup route"
   redirect coinbase_authorize_url, 303
 end
 
 
 get '/coinbase-oauth/callback' do
+  p "{LOG} in call back route"
   code = params[:code]
   token = request_coinbase_oauth_token(code)
   login_via_coinbase_token(token)
