@@ -12,7 +12,7 @@ get '/venmo-oauth/callback' do
       }
   url = "https://api.venmo.com/v1/oauth/access_token"
   response = RestClient.post url, data
-  response_dict = JSON.parse(response.to_str)
-  add_venmo_account_info(response_dict)
+  reponse_as_hash = JSON.parse(response.to_str)
+  add_venmo_account_info(reponse_as_hash)
   redirect '/'
 end
