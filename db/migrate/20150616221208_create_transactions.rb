@@ -7,7 +7,7 @@ class CreateTransactions < ActiveRecord::Migration
       t.string :description
       t.string :sender_account
       t.string :receiver_account
-      t.string :transaction_type #payment of charge
+      t.string :transaction_type #payment or charge
       t.string :status
 
       t.timestamps

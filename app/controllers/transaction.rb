@@ -28,8 +28,8 @@ post '/transactions' do
     description: params[:description],
     sender_id: current_user.id,
     receiver_id: receiver.id,
-    sender_account: "#{current_user.coin_base_acct}",
-    receiver_account: "#{receiver.venmo_base_acct}",
+    sender_account: "#{current_user.coinbase_account}",
+    receiver_account: "#{receiver.venmo_account}",
     status: "complete",
     transaction_type: params[:transaction_type],
   )

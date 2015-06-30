@@ -8,9 +8,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.float :coinbase_balance
       t.float :venmo_balance
-      t.float :account_balance
-      t.string :coin_base_acct
-      t.string :venmo_base_acct
+      # t.float :account_balance
+      t.string :coinbase_account
+      t.string :venmo_account
       t.string :avatar_url
 
       t.timestamps

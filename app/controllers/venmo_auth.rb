@@ -15,5 +15,13 @@ get '/venmo-oauth/callback' do
   reponse_as_hash = JSON.parse(response.to_str)
   add_venmo_account_info(reponse_as_hash)
   session['venmo_token'] = reponse_as_hash['access_token']
+  get_friends
   redirect '/'
+end
+
+#get venmo friends
+get '/profile/:username/friends' do
+  # url = "https://api.venmo.com/v1/users/#{current_user.venmo_account}/friends?access_token=#{session['venmo_token']}"
+  # response = RestClient.get url
+  # response_as_hash = JSON.parse(response.to_str)
 end

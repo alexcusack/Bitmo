@@ -32,7 +32,7 @@ helpers do
     user_credential(token)
     session['coinbase_token'] = token.to_hash
     coinbase_user_info = get_coinbase_user_info
-    user = User.where(coin_base_acct: coinbase_user_info['id']).first_or_initialize
+    user = User.where(coinbase_account: coinbase_user_info['id']).first_or_initialize
     user.username ||= coinbase_user_info['username']
     user.email    ||= coinbase_user_info['email']
     user.coinbase_balance ||= coinbase_user_info['balance']['amount']
@@ -55,8 +55,6 @@ helpers do
 
   def get_coinbase_balance
     # https://api.coinbase.com/v1/accounts/536a541fa9393bb3c7000034/balance
-    p current_user.coin_base_acct
-    binding-pry
     response = coinbase_token.get("https://api.coinbase.com/v1/accounts/#{current_user.coin_base_acct}/balance")
     raise "Failed to load coinbase user info" unless response.status == 200
     JSON.parse(response.body)['user']
@@ -65,9 +63,26 @@ helpers do
 
   def add_venmo_account_info(response)
     user =  current_user
-    user.venmo_base_acct = response['user']['id']
+    user.venmo_account = response['user']['id']
     user.venmo_balance = response['balance']
     user.save
   end
+
+  def get_friends
+    url = "https://api.venmo.com/v1/users/#{current_user.venmo_account}/friends?access_token=#{session['venmo_token']}"
+    response = RestClient.get url
+    response_as_hash = JSON.parse(response.to_str)
+    friends = response_as_hash['data']
+    friends.each do |friend|
+      person = Friend.where(username: friend['username']).first_or_initialize
+      person.username     ||= friend['username']
+      person.display_name ||= friend['display_name']
+      person.venmo_id     ||= friend['id']
+      person.avatar_url   ||= friend['profile_picture_url']
+      person.friend_of_id ||= current_user.id
+      person.save or raise "Friend was not save to database #{person.errors.full_messages.join("\n")}"
+    end
+  end
+
 
 end

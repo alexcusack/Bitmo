@@ -22,7 +22,7 @@
    <% end %>
 
    <div>
-    <a href="https://api.venmo.com/v1/users/<%=current_user.venmo_base_acct%>/friends?access_token=<%=session['venmo_token']%>">Get list of venmo friends</a>
+    <a href="/profile/<%=current_user.username%>/friends">Get list of venmo friends</a>
    </div>
 
   <div class="new-transactions">
