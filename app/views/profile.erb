@@ -21,6 +21,10 @@
    </div>
    <% end %>
 
+   <div>
+    <a href="https://api.venmo.com/v1/users/<%=current_user.venmo_base_acct%>/friends?access_token=<%=session['venmo_token']%>">Get list of venmo friends</a>
+   </div>
+
   <div class="new-transactions">
     <h1>New Transaction</h1>
     <form method="POST" action="/transactions" class="create-transaction">

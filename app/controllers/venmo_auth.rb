@@ -1,5 +1,5 @@
 get '/signup-with-venmo' do
- redirect "https://api.venmo.com/v1/oauth/authorize?client_id=#{ENV['VENMO_CLIENT_ID']}&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code"
+ redirect "https://api.venmo.com/v1/oauth/authorize?client_id=#{ENV['VENMO_CLIENT_ID']}&scope=make_payments%20access_profile%20access_friends%20access_email%20access_phone%20access_balance&response_type=code"
 end
 
 
@@ -14,5 +14,6 @@ get '/venmo-oauth/callback' do
   response = RestClient.post url, data
   reponse_as_hash = JSON.parse(response.to_str)
   add_venmo_account_info(reponse_as_hash)
+  session['venmo_token'] = reponse_as_hash['access_token']
   redirect '/'
 end
