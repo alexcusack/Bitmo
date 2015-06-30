@@ -48,7 +48,6 @@
         </tr>
       </thead>
       <tbody>
-        <!-- <tr class="row-spacing"></tr> -->
 
         <%@user_pending_transactions.each do |transaction|%>
           <%= erb :'_pending_transactions_row', :locals => {:transaction => transaction }%>
@@ -71,7 +70,6 @@
         </tr>
       </thead>
       <tbody>
-        <!-- <tr class="row-spacing"></tr> -->
         <% @user_transactions.each do |transaction| %>
           <%= erb :'_transaction_row', :locals => {:transaction => transaction }%>
         <% end %>
