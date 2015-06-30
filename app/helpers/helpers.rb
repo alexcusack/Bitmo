@@ -1,8 +1,13 @@
 helpers do
 
   def current_user
-    @current_user ||= User.where(id: session[:user_id]).first
+    @current_user ||= User.where(id: session[:user_id]).first if session[:user_id]
   end
+
+  def logged_in?
+    !current_user.nil?
+  end
+
 
   def get_all_user_transactions
     payments = current_user.payments.where.not(status:'pending')

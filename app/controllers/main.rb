@@ -6,21 +6,6 @@ get '/' do
   end
 end
 
-get '/signup-with-coinbase' do
-  p "{LOG} in sigup route"
-  redirect coinbase_authorize_url, 303
-end
-
-
-get '/coinbase-oauth/callback' do
-  p "{LOG} in call back route"
-  code = params[:code]
-  token = request_coinbase_oauth_token(code)
-  login_via_coinbase_token(token)
-  redirect to('/')
-end
-
-
 
 get '/logout' do
   session[:user_id] = nil
@@ -48,7 +33,6 @@ get '/profile/:username' do
   redirect '/' unless session[:user_id]
   if current_user.username == params[:username]
     @user = current_user
-    get_coinbase_balance
     get_all_user_transactions
     get_pending_transaction
     chronological_sort_transactions
@@ -61,8 +45,6 @@ get '/profile/:username' do
 end
 
 
-
-
 get '/search' do
   user = User.where(username: params[:query]).first
   if user
@@ -72,8 +54,6 @@ get '/search' do
     redirect "profile/#{current_user.username}"
   end
 end
-
-
 
 
 post '/transactions' do
