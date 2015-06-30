@@ -20,14 +20,8 @@ gem 'coinbase'
 
 gem 'shotgun'
 
-
-#venmo
-# gem 'constants'
 gem 'rest-client'
 gem 'json'
-
-
-#
 
 gem 'dotenv'
 

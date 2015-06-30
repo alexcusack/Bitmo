@@ -12,6 +12,9 @@ Dotenv.load
 require 'oauth2'
 require 'uri'
 require 'pathname'
+require 'rest-client'
+require 'json'
+
 
 require 'pg'
 require 'active_record'
