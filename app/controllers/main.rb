@@ -21,44 +21,11 @@ get '/coinbase-oauth/callback' do
 end
 
 
-# post '/login' do
-#   if @user = User.authenticate(params[:login][:username], params[:login][:password])
-#     session[:user_id] = @user.id
-#     redirect "/profile/#{current_user.username}"
-#   else
-#     @errors = ["that didn't seem to work... "]
-#     erb :index
-#   end
-# end
-
-
-
-# post '/signup' do
-#   if params[:signup][:password_hash] == params[:verify_password]
-#     new_user = User.new(params[:signup])
-#     new_user.password = params[:signup][:password_hash]
-#     if new_user.save
-#       session[:user_id] = new_user.id
-#       redirect "/account/setup"
-#     end
-#   end
-#   @errors = new_user.errors
-#   erb :index
-# end
-
-
 
 get '/logout' do
   session[:user_id] = nil
   redirect '/'
 end
-
-
-
-
-# get '/account/setup' do
-#   erb :account_setup
-# end
 
 
 
@@ -81,7 +48,7 @@ get '/profile/:username' do
   redirect '/' unless session[:user_id]
   if current_user.username == params[:username]
     @user = current_user
-    # refresh_account_balances
+    get_coinbase_balance
     get_all_user_transactions
     get_pending_transaction
     chronological_sort_transactions
@@ -96,7 +63,7 @@ end
 
 
 
-get '/search' do #search
+get '/search' do
   user = User.where(username: params[:query]).first
   if user
     redirect "/profile/#{user.username}"

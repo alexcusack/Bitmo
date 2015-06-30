@@ -2,7 +2,7 @@ helpers do
 
   def coinbase_oauth_client
     @coinbase_oauth_client ||= OAuth2::Client.new(
-      ENV['COINBASE_ClIENT_ID'],
+      ENV['COINBASE_CLIENT_ID'],
       ENV['COINBASE_CLIENT_SECRET'],
       site: 'https://www.coinbase.com/oauth/authorize',
     )
@@ -16,7 +16,16 @@ helpers do
     coinbase_oauth_client.auth_code.get_token(code, :redirect_uri => ENV['COINBASE_CALLBACK_URL'])
   end
 
+  def user_credential(token)
+    session['user_credentials'] = {
+      :access_token => token.token,
+      :refresh_token => token.refresh_token,
+      :expires_at => Time.now + 1.day
+    }
+  end
+
   def login_via_coinbase_token(token)
+    user_credential(token)
     session['coinbase_token'] = token.to_hash
     coinbase_user_info = get_coinbase_user_info
     user = User.where(coin_base_acct: coinbase_user_info['id']).first_or_initialize
@@ -39,6 +48,16 @@ helpers do
     raise "Failed to load coinbase user info" unless response.status == 200
     JSON.parse(response.body)['user']
   end
+
+  def get_coinbase_balance
+    # https://api.coinbase.com/v1/accounts/536a541fa9393bb3c7000034/balance
+    p current_user.coin_base_acct
+    binding-pry
+    response = coinbase_token.get("https://api.coinbase.com/v1/accounts/#{current_user.coin_base_acct}/balance")
+    raise "Failed to load coinbase user info" unless response.status == 200
+    JSON.parse(response.body)['user']
+  end
+
 
   def refresh_account_balances
     url = "https://api.coinbase.com/v1/accounts/#{current_user.coin_base_acct}/balance"

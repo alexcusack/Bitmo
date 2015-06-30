@@ -16,6 +16,7 @@ gem 'pry-byebug'
 gem 'faker'
 gem 'bcrypt'
 gem 'oauth2'
+gem 'coinbase'
 
 
 gem 'shotgun'
