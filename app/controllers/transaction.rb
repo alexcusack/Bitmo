@@ -19,8 +19,11 @@ end
 post '/transactions' do
   receiver = User.where(username: params[:to]).first
   if receiver.nil?
-    status 400
-    return "unable to find user: #{params[:to].inspect}"
+    receiver = Friend.where(username: params[:to], friend_of_id: current_user.id).first
+    if receiver.nil?
+      status 400
+      return "unable to find user: #{params[:to].inspect}"
+    end
   end
 
   transaction = Transaction.new(

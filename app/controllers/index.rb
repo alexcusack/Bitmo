@@ -13,7 +13,6 @@ get '/logout' do
 end
 
 
-
 get '/profile/:username' do
   redirect '/' unless session[:user_id]
   if current_user.username == params[:username]
