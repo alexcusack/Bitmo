@@ -14,4 +14,8 @@ class Transaction < ActiveRecord::Base
     status == 'pending'
   end
 
+
+
+
+
 end
