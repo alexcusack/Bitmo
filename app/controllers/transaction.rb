@@ -1,7 +1,3 @@
-# get '/transaction/:id' do
-#   #view individual transaction details
-# end
-
 
 put '/transaction/:id' do
   transaction = Transaction.find(params[:id])
@@ -17,9 +13,6 @@ end
 
 
 post '/transactions' do
-  # receiver = User.where(username: params[:to]).first
-  # if receiver.nil?
-
   receiver = Friend.where(username: params[:to], friend_of_id: current_user.id).first
   if receiver.nil?
     status 400
@@ -41,12 +34,6 @@ post '/transactions' do
     transaction_type: params[:transaction_type],
     venmo_json_response: response.to_json
   )
-
-  # if params[:transaction_type] == "Charge"  ### <-- for now you can only pay people
-  #   transaction.sender_id = "#{receiver.id}"
-  #   transaction.receiver_id = "#{current_user.id}"
-  #   transaction.status = "pending"
-  # end
 
   if transaction.save
     content_type :json
