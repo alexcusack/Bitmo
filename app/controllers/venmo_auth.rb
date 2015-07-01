@@ -12,16 +12,17 @@ get '/venmo-oauth/callback' do
       }
   url = "https://api.venmo.com/v1/oauth/access_token"
   response = RestClient.post url, data
-  reponse_as_hash = JSON.parse(response.to_str)
-  add_venmo_account_info(reponse_as_hash)
-  session['venmo_token'] = reponse_as_hash['access_token']
+  response_as_hash = JSON.parse(response.to_str)
+  binding.pry
+  session['venmo_token'] = {
+    "access_token" => response_as_hash['access_token'],
+    "expires_in" =>   response_as_hash['expires_in'],
+    "token_type" =>   response_as_hash['token_type'],
+    "refresh_token" => response_as_hash['refresh_token']
+    }
+
+  add_venmo_account_info(response_as_hash)
   get_friends
   redirect '/'
 end
 
-#get venmo friends
-get '/profile/:username/friends' do
-  # url = "https://api.venmo.com/v1/users/#{current_user.venmo_account}/friends?access_token=#{session['venmo_token']}"
-  # response = RestClient.get url
-  # response_as_hash = JSON.parse(response.to_str)
-end

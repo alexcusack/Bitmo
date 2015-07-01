@@ -36,19 +36,10 @@ helpers do
   end
 
 
-  def make_venmo_payment(receiver, token, transaction_args)
-    amount = transaction_args[:amount].to_f/100
-    url = "https://sandbox-api.venmo.com/v1?access_token=#{token}&amount=#{amount}&note=#{transaction_args[:description]}&#{receiver.venmo_account}"
-    # url = "https://sandbox-api.venmo.com/v1?access_token=b40c612ed787dc5f4cb1620cdc87e98462b3ac3accc6279cdf0c69e1506365a2&user_id=145434160922624933&amount=0.20&note=stufff"
-    data = {
-      "note"          =>  transaction_args[:description],
-      "user_id"       =>  receiver.venmo_account,
-      "amount"        =>  amount,
-      "access_token"  =>  token,
-      }
-    binding.pry
-    response = RestClient.post url, data
-    response_as_hash = JSON.parse(response.to_str)
+  def make_venmo_payment(receiver, transaction_args)
+    # amount = transaction_args[:amount].to_f/100
+    url = "https://sandbox-api.venmo.com/v1/payments?access_token=#{session['venmo_token']['access_token']}&user_id=#{receiver.venmo_account}&note=#{transaction_args[:description]}&amount=0.10"
+    response = HTTParty.post(url) #access_token: session['venmo_token'], user_id: receiver.venmo_account, note: transaction_args[:description] , amount: 0.10)
     binding.pry
   end
 

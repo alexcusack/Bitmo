@@ -17,6 +17,7 @@ gem 'faker'
 gem 'bcrypt'
 gem 'oauth2'
 gem 'coinbase'
+gem 'httparty'
 
 gem 'shotgun'
 

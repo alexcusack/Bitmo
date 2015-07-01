@@ -20,12 +20,8 @@ post '/transactions' do
   receiver = User.where(username: params[:to]).first
   if receiver.nil?
     receiver = Friend.where(username: params[:to], friend_of_id: current_user.id).first
-    p "{LOG} Found venmo friend"
-    arguments = params
     token = session['venmo_token']
-    make_venmo_payment(receiver, token, arguments)
-    p "{LOG} venmo transaction processed"
-    return
+    make_venmo_payment(receiver, params)
     if receiver.nil?
       status 400
       return "unable to find user: #{params[:to].inspect}"

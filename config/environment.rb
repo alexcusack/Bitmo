@@ -14,6 +14,7 @@ require 'uri'
 require 'pathname'
 require 'rest-client'
 require 'json'
+require 'httparty'
 
 
 require 'pg'
