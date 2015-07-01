@@ -8,7 +8,6 @@ helpers do
     !current_user.nil?
   end
 
-
   def get_all_user_transactions
     payments = current_user.payments.where.not(status:'pending')
     receipts = current_user.receipts.where.not(status:'pending')
