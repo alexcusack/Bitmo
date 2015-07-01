@@ -14,11 +14,9 @@ class Transaction < ActiveRecord::Base
     status == 'pending'
   end
 
-
-  def self.make_venmo_payment(uri, receiver)
+  def self.make_venmo_payment(uri)
     response = HTTParty.post(uri)
     return response
   end
-
 
 end

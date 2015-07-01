@@ -47,42 +47,12 @@ helpers do
 
 
  #######################################
-  def add_venmo_account_info(response)
-    user =  current_user
-    user.venmo_account = response['user']['id']
-    user.venmo_balance = response['balance']
-    user.save
-  end
-
-  # def get_next_page(url)
-  #   response = RestClient.get url
-  #   response_as_hash = JSON.parse(response.to_str)
-  #   next_page = "#{response_as_hash['pagination']['next']}&access_token=#{session['venmo_token']['access_token']}"
-  #   @friends << response_as_hash['data']
-  #   get_next_page(next_page) until @friends.length > 100
+  # def add_venmo_account_info(response)
+  #   user =  current_user
+  #   user.venmo_account = response['user']['id']
+  #   user.venmo_balance = response['balance']
+  #   user.save
   # end
-
-  def get_friends
-    # @friends = []
-    url = "https://api.venmo.com/v1/users/#{current_user.venmo_account}/friends?access_token=#{session['venmo_token']['access_token']}"
-    # get_next_page(url)
-    # next_page = response_as_hash['pagination']['next']+"&access_token=#{session['venmo_token']['access_token']}"
-    # @friends << get_next_page(url)
-
-    response = RestClient.get url
-    response_as_hash = JSON.parse(response.to_str)
-    # next_page = response_as_hash['pagination']['next']+"&access_token=#{session['venmo_token']['access_token']}"
-    @friends = response_as_hash['data']
-    @friends.each do |friend|
-      person = Friend.where(username: friend['username']).first_or_initialize
-      person.username      ||= friend['username'].downcase
-      person.display_name  ||= friend['display_name']
-      person.venmo_account ||= friend['id']
-      person.avatar_url    ||= friend['profile_picture_url']
-      person.friend_of_id  ||= current_user.id
-      person.save or raise "Friend was not save to database #{person.errors.full_messages.join("\n")}"
-    end
-  end
 
 
 end

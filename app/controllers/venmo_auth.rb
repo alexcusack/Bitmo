@@ -4,11 +4,10 @@ end
 
 
 get '/venmo-oauth/callback' do
-  code = request['code']
   data = {
       "client_id"=>ENV['VENMO_CLIENT_ID'],
       "client_secret"=>ENV['VENMO_CLIENT_SECRET'],
-      "code"=> code
+      "code"=> request['code']
       }
   url = "https://api.venmo.com/v1/oauth/access_token"
   response = RestClient.post url, data
@@ -19,9 +18,8 @@ get '/venmo-oauth/callback' do
     "token_type" =>   response_as_hash['token_type'],
     "refresh_token" => response_as_hash['refresh_token']
     }
-
-  add_venmo_account_info(response_as_hash)
-  get_friends
+  User.add_venmo_account_info(response_as_hash, current_user)
+  add_venmo_friends
   redirect '/'
 end
 
