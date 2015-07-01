@@ -35,12 +35,24 @@ helpers do
   end
 
 
-  def add_venmo_friends
-    url = "https://api.venmo.com/v1/users/#{current_user.venmo_account}/friends?access_token=#{session['venmo_token']['access_token']}"
+  def get_friends(url)
     response = RestClient.get url
     response_as_hash = JSON.parse(response.to_str)
-    friends = response_as_hash['data']
-    friends.each do |friend|
+    latest_set = response_as_hash['data']
+    @friends << response_as_hash['data']
+    next_call = "#{response_as_hash['pagination']['next']}&access_token=#{session['venmo_token']['access_token']}"
+    get_friends(next_call) unless response_as_hash['pagination']['next'].nil?
+    return @friends
+  end
+
+  def add_venmo_friends
+    @friends = []
+    url = "https://api.venmo.com/v1/users/#{current_user.venmo_account}/friends?access_token=#{session['venmo_token']['access_token']}"
+    get_friends(url)
+
+    @friends.flatten!
+
+    @friends.each do |friend|
       person = Friend.where(username: friend['username']).first_or_initialize
       person.username      ||= friend['username'].downcase
       person.display_name  ||= friend['display_name']
