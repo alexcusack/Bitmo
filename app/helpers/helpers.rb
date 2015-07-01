@@ -41,7 +41,7 @@ helpers do
     url = "https://api.venmo.com/v1/payments?access_token=#{session['venmo_token']['access_token']}&user_id=#{receiver.venmo_account}&note=#{transaction_args[:description]}&amount=#{amount}"
     uri = URI(url)
     response = HTTParty.post(uri)
-    binding.pry
+    return response
   end
 
 

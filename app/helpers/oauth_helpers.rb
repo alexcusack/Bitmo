@@ -75,7 +75,7 @@ helpers do
     @friends = response_as_hash['data']
     @friends.each do |friend|
       person = Friend.where(username: friend['username']).first_or_initialize
-      person.username      ||= friend['username']
+      person.username      ||= friend['username'].downcase
       person.display_name  ||= friend['display_name']
       person.venmo_account ||= friend['id']
       person.avatar_url    ||= friend['profile_picture_url']

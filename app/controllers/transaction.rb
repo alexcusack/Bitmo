@@ -17,35 +17,39 @@ end
 
 
 post '/transactions' do
-  receiver = User.where(username: params[:to]).first
+  # receiver = User.where(username: params[:to]).first
+  # if receiver.nil?
+
+  original_note = params[:description]
+  receiver = Friend.where(username: params[:to], friend_of_id: current_user.id).first
+  params[:description] = params[:description].delete(' ')
+  response = make_venmo_payment(receiver, params)
+  User.update_user_venmo_balance(current_user, response)
   if receiver.nil?
-    receiver = Friend.where(username: params[:to], friend_of_id: current_user.id).first
-    token = session['venmo_token']
-    make_venmo_payment(receiver, params)
-    if receiver.nil?
-      status 400
-      return "unable to find user: #{params[:to].inspect}"
-    end
+    status 400
+    return "Unable to find user: #{params[:to].inspect} \n transaction was not completed"
   end
 
   transaction = Transaction.new(
     amount: params[:amount],
-    description: params[:description],
+    description: original_note,
     sender_id: current_user.id,
     receiver_id: receiver.id,
     sender_account: "#{current_user.coinbase_account}",
     receiver_account: "#{receiver.venmo_account}",
     status: "complete",
     transaction_type: params[:transaction_type],
+    venmo_json_response: response.to_json
   )
 
-  if params[:transaction_type] == "Charge"
-    transaction.sender_id = "#{receiver.id}"
-    transaction.receiver_id = "#{current_user.id}"
-    transaction.status = "pending"
-  end
+  # if params[:transaction_type] == "Charge"  ### <-- for now you can only pay people
+  #   transaction.sender_id = "#{receiver.id}"
+  #   transaction.receiver_id = "#{current_user.id}"
+  #   transaction.status = "pending"
+  # end
 
   if transaction.save
+    # transaction.log_venmo_response(response)
     content_type :json
     html = erb :'_transaction_row', layout: false, locals: {transaction: transaction}
     {
@@ -60,4 +64,3 @@ post '/transactions' do
     }.to_json
   end
 end
-

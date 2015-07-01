@@ -28,4 +28,9 @@ class User < ActiveRecord::Base
     self.password_hash = @password
   end
 
+  def self.update_user_venmo_balance(user, response)
+    user.venmo_balance = response['data']['balance'].to_f
+  end
+
+
 end
