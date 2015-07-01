@@ -13,7 +13,6 @@ get '/venmo-oauth/callback' do
   url = "https://api.venmo.com/v1/oauth/access_token"
   response = RestClient.post url, data
   response_as_hash = JSON.parse(response.to_str)
-  binding.pry
   session['venmo_token'] = {
     "access_token" => response_as_hash['access_token'],
     "expires_in" =>   response_as_hash['expires_in'],

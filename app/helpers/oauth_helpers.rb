@@ -32,7 +32,6 @@ helpers do
   end
 
   def coinbase_token
-    binding.pry
     if token_as_hash = session['coinbase_token']
       @coinbase_token ||= OAuth2::AccessToken.from_hash(coinbase_oauth_client, token_as_hash)
     end
@@ -55,12 +54,26 @@ helpers do
     user.save
   end
 
+  # def get_next_page(url)
+  #   response = RestClient.get url
+  #   response_as_hash = JSON.parse(response.to_str)
+  #   next_page = "#{response_as_hash['pagination']['next']}&access_token=#{session['venmo_token']['access_token']}"
+  #   @friends << response_as_hash['data']
+  #   get_next_page(next_page) until @friends.length > 100
+  # end
+
   def get_friends
+    # @friends = []
     url = "https://api.venmo.com/v1/users/#{current_user.venmo_account}/friends?access_token=#{session['venmo_token']['access_token']}"
+    # get_next_page(url)
+    # next_page = response_as_hash['pagination']['next']+"&access_token=#{session['venmo_token']['access_token']}"
+    # @friends << get_next_page(url)
+
     response = RestClient.get url
     response_as_hash = JSON.parse(response.to_str)
-    friends = response_as_hash['data']
-    friends.each do |friend|
+    # next_page = response_as_hash['pagination']['next']+"&access_token=#{session['venmo_token']['access_token']}"
+    @friends = response_as_hash['data']
+    @friends.each do |friend|
       person = Friend.where(username: friend['username']).first_or_initialize
       person.username      ||= friend['username']
       person.display_name  ||= friend['display_name']
