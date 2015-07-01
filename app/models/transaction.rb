@@ -15,4 +15,10 @@ class Transaction < ActiveRecord::Base
   end
 
 
+  def self.make_venmo_payment(uri, receiver)
+    response = HTTParty.post(uri)
+    return response
+  end
+
+
 end

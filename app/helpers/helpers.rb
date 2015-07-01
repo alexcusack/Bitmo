@@ -36,13 +36,4 @@ helpers do
   end
 
 
-  def make_venmo_payment(receiver, transaction_args)
-    amount = transaction_args[:amount].to_f/100
-    url = "https://api.venmo.com/v1/payments?access_token=#{session['venmo_token']['access_token']}&user_id=#{receiver.venmo_account}&note=#{transaction_args[:description]}&amount=#{amount}"
-    uri = URI(url)
-    response = HTTParty.post(uri)
-    return response
-  end
-
-
 end
