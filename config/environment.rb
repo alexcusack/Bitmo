@@ -15,7 +15,8 @@ require 'pathname'
 require 'rest-client'
 require 'json'
 require 'httparty'
-
+require 'coinbase/wallet'
+# require 'coinbase'
 
 require 'pg'
 require 'active_record'

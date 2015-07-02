@@ -1,3 +1,5 @@
+
+
 helpers do
 
   def coinbase_oauth_client
@@ -21,6 +23,7 @@ helpers do
 
   def login_via_coinbase_token(token)
     session['coinbase_token'] = token.to_hash
+    binding.pry
     coinbase_user_info = get_coinbase_user_info
     user = User.where(coinbase_account: coinbase_user_info['id']).first_or_initialize
     user.username         ||= coinbase_user_info['username']
@@ -29,8 +32,13 @@ helpers do
     user.avatar_url       ||= coinbase_user_info['avatar_url']
     user.save or raise "unable to create user from coinbase data\n\n#{user.errors.full_messages.join("\n")}"
     session[:user_id] = user.id
+    session['coinbase_token'] = token.to_hash
+    coinbase_client
   end
 
+  def coinbase_client
+    @coinbase_client ||= Coinbase::Wallet::OAuthClient.new(access_token: session['coinbase_token'][:access_token], refresh_token:  session['coinbase_token'][:refresh_token])
+  end
 
   def coinbase_token
     if token_as_hash = session['coinbase_token']
