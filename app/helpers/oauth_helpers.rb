@@ -12,7 +12,7 @@ helpers do
 
 
   def coinbase_authorize_url
-    coinbase_oauth_client.auth_code.authorize_url(:redirect_uri => ENV['COINBASE_CALLBACK_URL'])+'&scope=user+balance'
+    coinbase_oauth_client.auth_code.authorize_url(:redirect_uri => ENV['COINBASE_CALLBACK_URL'])+'&scope=user+balance+addresses+buy+contacts+orders+sell+transactions+request+transfer+reports+send&meta[send_limit_amount]=99&meta[send_limit_currency]=USD&meta[send_limit_period]=day'
   end
 
 
@@ -23,7 +23,7 @@ helpers do
 
   def login_via_coinbase_token(token)
     session['coinbase_token'] = token.to_hash
-    binding.pry
+    coinbase_client
     coinbase_user_info = get_coinbase_user_info
     user = User.where(coinbase_account: coinbase_user_info['id']).first_or_initialize
     user.username         ||= coinbase_user_info['username']
@@ -33,7 +33,7 @@ helpers do
     user.save or raise "unable to create user from coinbase data\n\n#{user.errors.full_messages.join("\n")}"
     session[:user_id] = user.id
     session['coinbase_token'] = token.to_hash
-    coinbase_client
+    playground
   end
 
   def coinbase_client
@@ -46,11 +46,14 @@ helpers do
     end
   end
 
-
   def get_coinbase_user_info
     response = coinbase_token.get('https://api.coinbase.com/v1/users/self')
     raise "Failed to load coinbase user info" unless response.status == 200
     JSON.parse(response.body)['user']
+  end
+
+  def playground
+    binding.pry
   end
 
 end
