@@ -1,5 +1,3 @@
-
-
 helpers do
 
   def coinbase_oauth_client
@@ -23,7 +21,7 @@ helpers do
 
   def login_via_coinbase_token(token)
     session['coinbase_token'] = token.to_hash
-    coinbase_client
+    # coinbase_client
     coinbase_user_info = get_coinbase_user_info
     user = User.where(coinbase_account: coinbase_user_info['id']).first_or_initialize
     user.username         ||= coinbase_user_info['username']
@@ -33,7 +31,6 @@ helpers do
     user.save or raise "unable to create user from coinbase data\n\n#{user.errors.full_messages.join("\n")}"
     session[:user_id] = user.id
     session['coinbase_token'] = token.to_hash
-    playground
   end
 
   def coinbase_client
@@ -50,10 +47,6 @@ helpers do
     response = coinbase_token.get('https://api.coinbase.com/v1/users/self')
     raise "Failed to load coinbase user info" unless response.status == 200
     JSON.parse(response.body)['user']
-  end
-
-  def playground
-    binding.pry
   end
 
 end

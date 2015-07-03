@@ -39,4 +39,9 @@ get '/search' do
   end
 end
 
+get '/playground' do
+  binding.pry
+  p 'LOG'
+end
+
 
