@@ -19,6 +19,7 @@ end
 get '/profile/:username' do
   redirect '/' unless session[:user_id]
   p "{LOG} in profile after redirect"
+  binding.pry
   if current_user.username == params[:username]
     p "{LOG} if current_user"
     @user = current_user

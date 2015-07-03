@@ -51,7 +51,7 @@ configure do
 end
 
 use OmniAuth::Builder do
-  stuff = provider :coinbase, ENV["COINBASE_CLIENT_ID"], ENV["COINBASE_CLIENT_SECRET"], :callback_url => "http://localhost:9393/auth/coinbase/callback" ,scope: 'user balance'
+  provider :coinbase, ENV["COINBASE_CLIENT_ID"], ENV["COINBASE_CLIENT_SECRET"], :callback_url => "http://localhost:9393/auth/coinbase/callback", scope: 'user balance wallet:accounts:read wallet:addresses:read wallet:addresses:create wallet:transactions:send', meta: '{send_limit_amount: 50}'
 end
 
 # Set up the controllers and helpers
