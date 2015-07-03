@@ -18,6 +18,9 @@ gem 'bcrypt'
 gem 'oauth2'
 gem 'httparty'
 gem 'coinbase', '4.0.0'
+gem 'omniauth-coinbase'
+gem 'omniauth'
+gem 'omniauth-oauth2'
 
 gem 'shotgun'
 

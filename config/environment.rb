@@ -15,8 +15,6 @@ require 'pathname'
 require 'rest-client'
 require 'json'
 require 'httparty'
-require 'coinbase/wallet'
-# require 'coinbase'
 
 require 'pg'
 require 'active_record'
@@ -27,6 +25,13 @@ require "sinatra/reloader" if development?
 require 'pry-byebug' if development?
 
 require 'erb'
+
+
+require 'coinbase/wallet'
+require 'omniauth-coinbase'
+require 'omniauth'
+
+
 
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
@@ -43,6 +48,10 @@ configure do
 
   # Set the views to
   set :views, File.join(Sinatra::Application.root, "app", "views")
+end
+
+use OmniAuth::Builder do
+  stuff = provider :coinbase, ENV["COINBASE_CLIENT_ID"], ENV["COINBASE_CLIENT_SECRET"], :callback_url => "http://localhost:9393/auth/coinbase/callback" ,scope: 'user balance'
 end
 
 # Set up the controllers and helpers

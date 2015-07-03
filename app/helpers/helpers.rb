@@ -1,6 +1,7 @@
 helpers do
 
   def current_user
+    p "{LOG} in current_user helper"
     @current_user ||= User.where(id: session[:user_id]).first if session[:user_id]
   end
 
