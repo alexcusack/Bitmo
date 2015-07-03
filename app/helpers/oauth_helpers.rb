@@ -19,33 +19,30 @@ helpers do
   # end
 
 
-  def login_via_coinbase_token(token)
-    session['coinbase_token'] = token.to_hash
-    coinbase_user_info = get_coinbase_user_info
+  def login_via_coinbase_token
+    coinbase_user_info = request.env['omniauth.auth']['extra']['raw_info']
+    # session['coinbase_token'] = token['omniauth.auth']['credentials'].to_hash
+    # coinbase_user_info = get_coinbase_user_info
     user = User.where(coinbase_account: coinbase_user_info['id']).first_or_initialize
-    user.username         ||= coinbase_user_info['username']
-    user.email            ||= coinbase_user_info['email']
-    user.coinbase_balance ||= coinbase_user_info['balance']['amount']
-    user.avatar_url       ||= coinbase_user_info['avatar_url']
+    user.username         ||= coinbase_user_info.username
+    user.email            ||= coinbase_user_info.email
+    user.coinbase_balance ||= coinbase_user_info.balance.amount
+    user.avatar_url       ||= coinbase_user_info.avatar_url
     user.save or raise "unable to create user from coinbase data\n\n#{user.errors.full_messages.join("\n")}"
     session[:user_id] = user.id
-    session['coinbase_token'] = token.to_hash
+    binding.pry
   end
 
   def coinbase_client
-    @coinbase_client ||= Coinbase::Wallet::OAuthClient.new(access_token: session['coinbase_token'][:access_token], refresh_token:  session['coinbase_token'][:refresh_token])
+    @coinbase_client ||= Coinbase::Wallet::OAuthClient.new(access_token: request.env['omniauth.auth']['credentials']['token'], refresh_token: request.env['omniauth.auth']['credentials']['refresh_token'])
   end
 
-  def coinbase_token
-    if token_as_hash = session['coinbase_token']
-      @coinbase_token ||= OAuth2::AccessToken.from_hash(coinbase_oauth_client, token_as_hash)
-    end
-  end
+  # def coinbase_token
+  #     @coinbase_token ||= OAuth2::AccessToken.from_hash(coinbase_oauth_client, request.env['omniauth.auth']['credentials'])
+  # end
 
-  def get_coinbase_user_info
-    response = coinbase_token.get('https://api.coinbase.com/v1/users/self')
-    raise "Failed to load coinbase user info" unless response.status == 200
-    JSON.parse(response.body)['user']
+  def get_coinbase_user_info(token)
+    request.env['omniauth.auth']['extra']['raw_info']
   end
 
 end
