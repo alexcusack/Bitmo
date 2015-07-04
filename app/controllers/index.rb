@@ -1,10 +1,7 @@
 get '/' do
-  p "{LOG} in index"
   if logged_in?
-    p "{LOG} in index redirect"
     redirect "/profile/#{current_user.username}"
   else
-    p '{LOG} in else'
     erb :index
   end
 end
@@ -18,10 +15,8 @@ end
 
 get '/profile/:username' do
   redirect '/' unless session[:user_id]
-  p "{LOG} in profile after redirect"
-  binding.pry
   if current_user.username == params[:username]
-    p "{LOG} if current_user"
+    binding.pry
     @user = current_user
     get_all_user_transactions
     get_pending_transaction

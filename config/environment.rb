@@ -48,11 +48,11 @@ configure do
 end
 
 use OmniAuth::Builder do
-  provider :coinbase, ENV["COINBASE_CLIENT_ID"], ENV["COINBASE_CLIENT_SECRET"], 
-  # :callback_url => "http://localhost:9393/auth/coinbase/callback", 
-  scope: 'user balance wallet:accounts:read wallet:addresses:read wallet:addresses:create send', 
+  provider :coinbase, ENV["COINBASE_CLIENT_ID"], ENV["COINBASE_CLIENT_SECRET"],
+  scope: 'user balance wallet:accounts:read wallet:addresses:read wallet:addresses:create send',
   meta: {:send_limit_amount => '100', :send_limit_currency => 'USD', :send_limit_period => 'day'}
 end
+
 # Set up the controllers and helpers
 Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
 Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
