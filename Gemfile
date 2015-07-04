@@ -13,12 +13,11 @@ gem 'activerecord', '~>4.2.0'
 
 gem 'rake'
 gem 'pry-byebug'
-gem 'faker'
 gem 'bcrypt'
 gem 'oauth2'
 gem 'httparty'
 gem 'coinbase', '4.0.0'
-gem 'omniauth-coinbase'
+gem 'omniauth-coinbase', '1.0.2'
 gem 'omniauth'
 gem 'omniauth-oauth2'
 
