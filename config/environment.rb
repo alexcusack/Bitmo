@@ -9,7 +9,7 @@ require 'dotenv'
 
 Dotenv.load
 
-require 'oauth2'
+# require 'oauth2'
 require 'uri'
 require 'pathname'
 require 'rest-client'
@@ -25,7 +25,7 @@ require "sinatra/reloader" if development?
 require 'pry-byebug' if development?
 require 'erb'
 require 'omniauth-coinbase'
-require 'omniauth'
+# require 'omniauth'
 require 'coinbase/wallet'
 
 
@@ -49,7 +49,7 @@ end
 
 use OmniAuth::Builder do
   provider :coinbase, ENV["COINBASE_CLIENT_ID"], ENV["COINBASE_CLIENT_SECRET"],
-  scope: 'user balance wallet:accounts:read wallet:addresses:read wallet:addresses:create send',
+  scope: 'user balance wallet:accounts:read wallet:addresses:read wallet:addresses:create wallet:transactions:send',
   meta: {:send_limit_amount => '100', :send_limit_currency => 'USD', :send_limit_period => 'day'}
 end
 
