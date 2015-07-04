@@ -1,4 +1,3 @@
-
 put '/transaction/:id' do
   transaction = Transaction.find(params[:id])
   if params[:content] == 'accept'

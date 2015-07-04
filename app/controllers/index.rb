@@ -16,7 +16,6 @@ end
 get '/profile/:username' do
   redirect '/' unless session[:user_id]
   if current_user.username == params[:username]
-    binding.pry
     @user = current_user
     get_all_user_transactions
     get_pending_transaction
