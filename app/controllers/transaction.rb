@@ -1,26 +1,20 @@
-put '/transaction/:id' do
-  transaction = Transaction.find(params[:id])
-  if params[:content] == 'accept'
-    transaction.status = 'completed'
-  else params[:content] == 'reject'
-    transaction.status = 'rejected'
-  end
-  transaction.save
-  content_type :json
-  transaction.to_json
+get '/transaction/new' do
+  erb :transaction_new
 end
 
 
 post '/transactions' do
-  receiver = Friend.where(username: params[:to], friend_of_id: current_user.id).first
-  if receiver.nil?
-    status 400
-    return "Unable to find user: #{params[:to].inspect} \n transaction was not completed"
-  end
+  binding.pry
 
-  uri = URI("https://api.venmo.com/v1/payments?access_token=#{session['venmo_token']['access_token']}&user_id=#{receiver.venmo_account}&note=#{params[:description].delete(' ')}&amount=#{params[:amount].to_f/100}")
-  venmo_response = Transaction.make_venmo_payment(uri)
-  User.update_user_venmo_balance(current_user, venmo_response)
+  # receiver = Friend.where(username: params[:to], friend_of_id: current_user.id).first
+  # if receiver.nil?
+  #   status 400
+  #   return "Unable to find user: #{params[:to].inspect} \n transaction was not completed"
+  # end
+
+  # uri = URI("https://api.venmo.com/v1/payments?access_token=#{session['venmo_token']['access_token']}&user_id=#{receiver.venmo_account}&note=#{params[:description].delete(' ')}&amount=#{params[:amount].to_f/100}")
+  # venmo_response = Transaction.make_venmo_payment(uri)
+  # User.update_user_venmo_balance(current_user, venmo_response)
 
   transaction = Transaction.new(
     amount: params[:amount],
@@ -48,4 +42,17 @@ post '/transactions' do
       transaction: transaction.to_json(methods: [:errors]),
     }.to_json
   end
+end
+
+
+put '/transaction/:id' do
+  transaction = Transaction.find(params[:id])
+  if params[:content] == 'accept'
+    transaction.status = 'completed'
+  else params[:content] == 'reject'
+    transaction.status = 'rejected'
+  end
+  transaction.save
+  content_type :json
+  transaction.to_json
 end
