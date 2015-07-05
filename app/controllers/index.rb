@@ -9,14 +9,7 @@ end
 get '/playground' do
   account = coinbase_client.primary_account
   binding.pry
-  # begin
-  #   account.send(to: 'cusackpeter@gmail.com', amount: '1', currency: "USD")
-  # rescue Coinbase::Client::TwoFactorRequiredError
-  #   # Show 2FA dialog to user and collect 2FA token
-  #   # Re-try call with `two_factor_token` param
-  #   binding.pry
-  #   account.send(to: 'cusackpeter@gmail.com', amount: '1', currency: "USD", two_factor_token: "123456")
-  # end
+  #account.send(to: 'cusackpeter@gmail.com', amount: '1', currency: "USD", two_factor_token: "123456") ##this actually works, but throws an 'internal server error in the console w/ comment to contact coinbase'. Payment does actually go through though
 end
 
 
