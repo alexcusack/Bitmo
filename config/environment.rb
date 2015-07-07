@@ -5,11 +5,16 @@ ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 
 require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
-# Require gems we care about
-require 'rubygems'
+require 'dotenv'
 
+Dotenv.load
+
+# require 'oauth2'
 require 'uri'
 require 'pathname'
+require 'rest-client'
+require 'json'
+require 'httparty'
 
 require 'pg'
 require 'active_record'
@@ -17,8 +22,13 @@ require 'logger'
 
 require 'sinatra'
 require "sinatra/reloader" if development?
-
+require 'pry-byebug' if development?
 require 'erb'
+require 'omniauth-coinbase'
+# require 'omniauth'
+require 'coinbase/wallet'
+
+
 
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
@@ -35,6 +45,12 @@ configure do
 
   # Set the views to
   set :views, File.join(Sinatra::Application.root, "app", "views")
+end
+
+use OmniAuth::Builder do
+  provider :coinbase, ENV["COINBASE_CLIENT_ID"], ENV["COINBASE_CLIENT_SECRET"],
+  scope: 'user balance wallet:accounts:read wallet:addresses:read wallet:addresses:create wallet:transactions:send',
+  meta: {:send_limit_amount => '100', :send_limit_currency => 'USD', :send_limit_period => 'day'}
 end
 
 # Set up the controllers and helpers

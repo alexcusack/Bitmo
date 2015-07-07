@@ -8,8 +8,8 @@ require 'faker'
      password_hash: 'banana',
      phone_number: "123-435-0202",
      email: Faker::Internet.email,
-     coin_base_acct: "12345678",
-     venmo_base_acct: "123456"
+     coinbase_account: "12345678",
+     venmo_account: "123456"
     )
 end
 

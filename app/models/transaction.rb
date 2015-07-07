@@ -1,5 +1,4 @@
 class Transaction < ActiveRecord::Base
-  # Remember to create a migration!
   belongs_to :sender, class_name: "User"
   belongs_to :receiver, class_name: "User"
 
@@ -9,5 +8,14 @@ class Transaction < ActiveRecord::Base
   validates :transaction_type, :presence => true
   validates :status, :presence => true
   validates :amount, :presence => true
+
+  def pending?
+    status == 'pending'
+  end
+
+  def self.make_venmo_payment(uri)
+    response = HTTParty.post(uri)
+    return response
+  end
 
 end
