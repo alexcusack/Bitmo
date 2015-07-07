@@ -6,18 +6,8 @@ get '/' do
   end
 end
 
-get '/playground' do
-  account = coinbase_client.primary_account
-  binding.pry
-  #account.send(to: 'cusackpeter@gmail.com', amount: '1', currency: "USD", two_factor_token: "123456") ##this actually works, but throws an 'internal server error in the console w/ comment to contact coinbase'. Payment does actually go through though
-end
 
 
-
-get '/logout' do
-  session[:user_id] = nil
-  redirect '/'
-end
 
 
 get '/profile/:username' do
@@ -45,6 +35,3 @@ get '/search' do
     redirect "profile/#{current_user.username}"
   end
 end
-
-
-

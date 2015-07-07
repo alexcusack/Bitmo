@@ -4,17 +4,12 @@ end
 
 
 post '/transactions' do
-  binding.pry
 
-  # receiver = Friend.where(username: params[:to], friend_of_id: current_user.id).first
-  # if receiver.nil?
-  #   status 400
-  #   return "Unable to find user: #{params[:to].inspect} \n transaction was not completed"
-  # end
+  receiver = Friend.find_or_create_by!(email: params[:to]) #TOOD: add email field to friends table
+  make_coinbase_payemt(params)
+  venmo_transfer_to_initializing_user
+  venmo_payment_from_currentuser_to_receipant(receiver)
 
-  # uri = URI("https://api.venmo.com/v1/payments?access_token=#{session['venmo_token']['access_token']}&user_id=#{receiver.venmo_account}&note=#{params[:description].delete(' ')}&amount=#{params[:amount].to_f/100}")
-  # venmo_response = Transaction.make_venmo_payment(uri)
-  # User.update_user_venmo_balance(current_user, venmo_response)
 
   transaction = Transaction.new(
     amount: params[:amount],
