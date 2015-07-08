@@ -2,10 +2,9 @@ get '/transaction/new' do
   erb :transaction_new
 end
 
-
 post '/transactions' do
 
-  receiver = Friend.find_or_create_by!(email: params[:to])
+  receiver = Friend.find_or_create_by!(email: params[:to], friend_of_id: current_user.id)
   make_coinbase_payemt(params)
   # venmo_transfer_to_initializing_user
   # venmo_payment_from_currentuser_to_receipant(receiver)

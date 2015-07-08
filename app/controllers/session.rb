@@ -9,8 +9,6 @@ end
 
 
 get '/venmo-oauth/callback' do
-
-
   data = {
       "client_id"=>ENV['VENMO_CLIENT_ID'],
       "client_secret"=>ENV['VENMO_CLIENT_SECRET'],
