@@ -9,6 +9,8 @@ end
 
 
 get '/venmo-oauth/callback' do
+
+
   data = {
       "client_id"=>ENV['VENMO_CLIENT_ID'],
       "client_secret"=>ENV['VENMO_CLIENT_SECRET'],
@@ -18,10 +20,10 @@ get '/venmo-oauth/callback' do
   response = RestClient.post url, data
   response_as_hash = JSON.parse(response.to_str)
   session['venmo_token'] = {
-    "access_token" => response_as_hash['access_token'],
-    "expires_in" =>   response_as_hash['expires_in'],
-    "token_type" =>   response_as_hash['token_type'],
-    "refresh_token" => response_as_hash['refresh_token']
+    "access_token"  => response_as_hash['access_token'],
+    "expires_in"    => response_as_hash['expires_in'],
+    "token_type"    => response_as_hash['token_type'],
+    "refresh_token" => response_as_hash['refresh_token'],
     }
   User.add_venmo_account_info(response_as_hash, current_user)
   add_venmo_friends

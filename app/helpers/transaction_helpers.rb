@@ -1,8 +1,12 @@
 helpers do
 
  def make_coinbase_payemt(params)
-  acount = coinbase_client.primary_account
-  account.send(to: 'cusackalex@me.com', amount: params[:amount], currency: params[:currency], two_factor_token: params[:auth])
+  account = coinbase_client.primary_account
+  if account
+    account.send(to: 'cusackalex@me.com', amount: params[:amount], currency: params[:currency], two_factor_token: params[:auth])
+  else
+    halt! 'current user coinbase account not found'
+  end
  end
 
  def venmo_transfer_to_initializing_user

@@ -5,10 +5,10 @@ end
 
 post '/transactions' do
 
-  receiver = Friend.find_or_create_by!(email: params[:to]) #TOOD: add email field to friends table
+  receiver = Friend.find_or_create_by!(email: params[:to])
   make_coinbase_payemt(params)
-  venmo_transfer_to_initializing_user
-  venmo_payment_from_currentuser_to_receipant(receiver)
+  # venmo_transfer_to_initializing_user
+  # venmo_payment_from_currentuser_to_receipant(receiver)
 
 
   transaction = Transaction.new(

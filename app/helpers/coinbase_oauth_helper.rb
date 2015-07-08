@@ -1,6 +1,7 @@
 helpers do
 
  def login_via_coinbase_token
+    p "{LOG} in login via coinbase"
     coinbase_user_info = request.env['omniauth.auth']['extra']['raw_info']
     session['coinbase_token'] = request.env['omniauth.auth']['credentials']
     user = User.where(coinbase_account: coinbase_user_info['id']).first_or_initialize
