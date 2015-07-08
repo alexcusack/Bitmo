@@ -165,7 +165,6 @@ DEPENDENCIES
   httparty
   json
   oauth2
-  omniauth
   omniauth-coinbase!
   omniauth-oauth2
   pg
