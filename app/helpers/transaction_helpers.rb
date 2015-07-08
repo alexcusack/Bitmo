@@ -14,7 +14,7 @@ helpers do
       halt! 'current user coinbase account not found'
     end
   rescue Coinbase::Wallet::InternalServerError
-    # ignore these errors because it works
+    # ignore these errors because it works...
   end
 
   def venmo_transfer_to_initializing_user

@@ -1,13 +1,14 @@
 $(document).ready(function() {
 
 
-  $('.create-transaction input[type=submit]').on('click', function(event){
+  $('.payment-form input[type=submit]').on('click', function(event){
     var submitButton = $(this);
     submitButton.closest('form').find('input[name=transaction_type]').val(submitButton.val());
   });
 
-  $('.create-transaction').on('submit', function(event){
+  $('.payment-form').on('submit', function(event){
     event.preventDefault();
+    console.log('hello')
     var form = $(this).closest('form');
     makePayment(form);
     form.find('input[name=transaction_type]').val('Pay');
