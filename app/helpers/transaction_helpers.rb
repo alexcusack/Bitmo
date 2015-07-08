@@ -3,7 +3,7 @@ helpers do
  def make_coinbase_payemt(params)
   account = coinbase_client.primary_account
   if account
-    account.send(to: 'cusackalex@me.com', amount: params[:amount], currency: params[:currency], two_factor_token: params[:auth])
+    account.send(to: params[:to], amount: params[:amount], currency: params[:currency], two_factor_token: params[:auth], description: params[:description])
   else
     halt! 'current user coinbase account not found'
   end
