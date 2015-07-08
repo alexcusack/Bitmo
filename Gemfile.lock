@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/cusackalex/omniauth-coinbase.git
-  revision: 29a7e2e378bce1d2b81a14e4b56425a5ae3f81fe
+  revision: 880409919db15b043bdf2a408f371339889f14a7
   specs:
-    omniauth-coinbase (0.0.1)
+    omniauth-coinbase (1.0.2)
       multi_json (~> 1.3)
       omniauth-oauth2
 
@@ -177,3 +177,6 @@ DEPENDENCIES
   shoulda-matchers
   sinatra
   sinatra-contrib
+
+BUNDLED WITH
+   1.10.4
