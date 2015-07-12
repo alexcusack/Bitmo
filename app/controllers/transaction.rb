@@ -3,11 +3,10 @@ get '/transaction/new' do
 end
 
 post '/transactions' do
-
-  receiver = Friend.find_or_create_by!(email: params[:to], friend_of_id: current_user.id)
-  make_coinbase_payemt(params)
+  receiver = Friend.find_or_create_by!(email: params[:to])
+  # make_coinbase_payemt(params)
   # venmo_transfer_to_initializing_user
-  # venmo_payment_from_currentuser_to_receipant(receiver)
+  venmo_transaction_log = venmo_payment_from_currentuser_to_receipant(receiver)
 
   transaction = Transaction.new(
     amount: params[:amount],
@@ -16,10 +15,10 @@ post '/transactions' do
     receiver_id: receiver.id,
     status: "complete",
     transaction_type: 'Payment',
+    venmo_json_response: venmo_transaction_log,
   )
 
   if transaction.save
-    p 'in transaction save'
     content_type :json
     html = erb :'_transaction_row', layout: false, locals: {transaction: transaction}
     {
