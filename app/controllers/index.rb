@@ -9,7 +9,7 @@ end
 
 get '/profile/:username' do
   binding.pry
-  redirect '/' unless session[:user_id]
+  redirect '/' if current_user == nil
   if current_user.username == params[:username]
     @user = current_user
     get_all_user_transactions
