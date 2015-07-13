@@ -24,6 +24,15 @@ get '/profile/:username' do
 end
 
 
+get '/listener' do
+  p params
+ return params[:venmo_challenge]
+ # return params['venmo_challenge']
+
+end
+
+
+
 get '/search' do
   user = User.where(username: params[:query]).first
   if user
