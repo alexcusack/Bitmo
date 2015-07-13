@@ -8,6 +8,7 @@ end
 
 
 get '/profile/:username' do
+  binding.pry
   redirect '/' unless session[:user_id]
   if current_user.username == params[:username]
     @user = current_user
