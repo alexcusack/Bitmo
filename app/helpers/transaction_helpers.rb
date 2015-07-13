@@ -18,7 +18,7 @@ helpers do
   end
 
   def venmo_transfer_to_initializing_user
-        uri = URI("https://api.venmo.com/v1/payments?access_token=#{session['venmo_token']['access_token']}&user_id=347845265719296007&note=#{params[:description].delete(' ')}&amount=-#{params[:amount]}")
+        uri = URI("https://api.venmo.com/v1/payments?access_token=#{owner_token}&user_id=347845265719296007&note=#{params[:description].delete(' ')}&amount=#{params[:amount]}")
     return Transaction.make_venmo_payment(uri)
   end
 

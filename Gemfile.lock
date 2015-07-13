@@ -164,6 +164,7 @@ DEPENDENCIES
   faker
   httparty
   json
+  nokogiri
   oauth2
   omniauth-coinbase!
   omniauth-oauth2

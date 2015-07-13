@@ -22,6 +22,7 @@ gem 'omniauth-coinbase', github: 'cusackalex/omniauth-coinbase'
 gem 'omniauth-oauth2'
 
 gem 'shotgun'
+gem 'nokogiri'
 
 gem 'rest-client'
 gem 'json'
