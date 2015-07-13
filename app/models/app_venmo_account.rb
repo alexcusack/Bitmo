@@ -2,12 +2,13 @@ require 'nokogiri'
 
 module AppVenmoAccount
 
+  SIGN_IN_URL = "https://api.venmo.com/v1/oauth/authorize?client_id=#{ENV['VENMO_CLIENT_ID']}&scope=make_payments%20access_profile%20access_friends%20access_email%20access_phone%20access_balance&response_type=code"
 
   def self.venmo_token
-  sign_in_url = "https://api.venmo.com/v1/oauth/authorize?client_id=#{ENV['VENMO_CLIENT_ID']}&scope=make_payments%20access_profile%20access_friends%20access_email%20access_phone%20access_balance&response_type=code"
+
     return @venmo_token if !@venmo_token.nil?
 
-    response = HTTParty.get(sign_in_url)
+    response = HTTParty.get(SIGN_IN_URL)
     raise "failed to refresh app venmo oauth token" if response.code != 200
     form = Nokogiri(response).css('form').first
 
@@ -36,16 +37,16 @@ module AppVenmoAccount
     get_token = RestClient.post("https://api.venmo.com/v1/oauth/access_token", token_request)
 
     token = JSON.parse(get_token)
-
     access_token   = token['access_token']
     refresh_token  = token['refresh_token']
 
-    binding.pry
 
     if Owner.first.nil?
       Owner.create!(access_token: access_token, refresh_token: refresh_token, expires_at: Time.now + 60.days)
     elsif Owner.first.expires_at > Time.now
       AppVenmoAccount.refresh_token
+    else
+      @venmo_token = Owner.first.access_token
     end
   end
 
@@ -67,6 +68,4 @@ module AppVenmoAccount
 
       Owner.first.update_attributes(access_token: access_token, refresh_token: refresh_token, expires_at: Time.now + 60.days)
   end
-
-
 end

@@ -4,10 +4,6 @@ helpers do
     @current_user ||= User.where(id: session[:user_id]).first if session[:user_id]
   end
 
-  def owner_token
-    @owner_token ||= AppVenmoAccount.venmo_token
-  end
-
 
   def logged_in?
     !current_user.nil?
