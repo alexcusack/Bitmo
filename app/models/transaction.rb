@@ -15,7 +15,6 @@ class Transaction < ActiveRecord::Base
 
   def self.make_venmo_payment(uri)
     response = HTTParty.post(uri)
-    binding.pry
     return response
   end
 

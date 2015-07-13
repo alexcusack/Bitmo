@@ -1,8 +1,7 @@
-<tr>
+<tr class="transaction-row">
   <td><span class="transaction-information transaction-date"><%= transaction.created_at.strftime("%m-%d-%y") %></span></td>
   <td><span class="transaction-information sender_id"><%= transaction.transaction_type %></span></td>
   <td><span class="transaction-information description"><%= transaction.description %></span></td>
   <td><span class="transaction-information status"><%= transaction.status %></span></td>
   <td><span class="transaction-information amount">$<%= transaction.amount %></span></td>
 </tr>
-<tr class="row-spacing"></tr>

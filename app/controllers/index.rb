@@ -8,7 +8,6 @@ end
 
 
 get '/profile/:username' do
-  binding.pry
   redirect '/' if current_user == nil
   if current_user.username == params[:username]
     @user = current_user
@@ -25,14 +24,14 @@ end
 
 
 get '/listener' do
-  p params
  return params[:venmo_challenge]
 end
 
 
 
 get '/search' do
-  user = User.where(username: params[:query]).first
+  user = User.where(email: params[:query]).first
+  user = Friend.where(email: params[:query]).first if user.nil?
   if user
     redirect "/profile/#{user.username}"
   else
