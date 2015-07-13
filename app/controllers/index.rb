@@ -27,8 +27,6 @@ end
 get '/listener' do
   p params
  return params[:venmo_challenge]
- # return params['venmo_challenge']
-
 end
 
 
