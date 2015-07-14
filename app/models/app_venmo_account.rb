@@ -1,10 +1,19 @@
-require 'nokogiri'
-
 module AppVenmoAccount
 
   SIGN_IN_URL = "https://api.venmo.com/v1/oauth/authorize?client_id=#{ENV['VENMO_CLIENT_ID']}&scope=make_payments%20access_profile%20access_friends%20access_email%20access_phone%20access_balance&response_type=code"
 
   def self.venmo_token
+
+    owner = Owner.first
+
+    if owner.access_token && owner.expires_at < Time.now
+      @venmo_token =  AppVenmoAccount.refresh_token
+    end
+
+
+    if owner.access_token && owner.expires_at > Time.now
+      @venmo_token = owner.access_token
+    end
 
     return @venmo_token if !@venmo_token.nil?
 
@@ -41,31 +50,30 @@ module AppVenmoAccount
     refresh_token  = token['refresh_token']
 
 
-    if Owner.first.nil?
-      Owner.create!(access_token: access_token, refresh_token: refresh_token, expires_at: Time.now + 60.days)
-    elsif Owner.first.expires_at > Time.now
-      AppVenmoAccount.refresh_token
-    else
-      @venmo_token = Owner.first.access_token
-    end
+    Owner.create!(access_token: access_token, refresh_token: refresh_token, expires_at: Time.now + 60.days)
+    @venmo_token = Owner.first.access_token
+
   end
 
 
   def self.refresh_token
     refresh_token = Owner.first.refresh_token
 
-     refresh_request = {
+    refresh_request = {
       "client_id"=>ENV['VENMO_CLIENT_ID'],
       "client_secret"=>ENV['VENMO_CLIENT_SECRET'],
       "refresh_token"=> refresh_token
-      }
+    }
 
-      new_token = RestClient.post("https://api.venmo.com/v1/oauth/access_token", refresh_request)
-      token = JSON.parse(get_token)
+    new_token = RestClient.post("https://api.venmo.com/v1/oauth/access_token", refresh_request)
+    token = JSON.parse(get_token)
 
-      access_token   = token['access_token']
-      refresh_token  = token['refresh_token']
+    access_token   = token['access_token']
+    refresh_token  = token['refresh_token']
 
-      Owner.first.update_attributes(access_token: access_token, refresh_token: refresh_token, expires_at: Time.now + 60.days)
+    Owner.first.update_attributes(access_token: access_token, refresh_token: refresh_token, expires_at: Time.now + 60.days)
+
+    return Owner.first.access_token
   end
+
 end

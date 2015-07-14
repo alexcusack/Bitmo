@@ -15,6 +15,7 @@ require 'pathname'
 require 'rest-client'
 require 'json'
 require 'httparty'
+require 'nokogiri'
 
 require 'pg'
 require 'active_record'
