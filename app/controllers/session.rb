@@ -1,4 +1,5 @@
 get '/auth/coinbase/callback' do
+  cross_origin
   login_via_coinbase_token
   redirect to('/')
 end

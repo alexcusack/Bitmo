@@ -13,6 +13,8 @@ require 'json'
 require 'httparty'
 require 'nokogiri'
 
+require 'sinatra/cross_origin'
+
 require 'pg'
 require 'active_record'
 require 'logger'
@@ -34,6 +36,7 @@ APP_NAME = APP_ROOT.basename.to_s
 configure do
   set :root, APP_ROOT.to_path
   enable :sessions
+  enable :cross_origin
   set :session_secret, ENV['SESSION_SECRET'] || 'this is a secret shhhhh'
 
   set :views, File.join(Sinatra::Application.root, "app", "views")
