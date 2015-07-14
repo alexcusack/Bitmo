@@ -6,7 +6,6 @@ require 'dotenv'
 
 Dotenv.load
 
-# require 'oauth2'
 require 'uri'
 require 'pathname'
 require 'rest-client'
@@ -23,7 +22,6 @@ require "sinatra/reloader" if development?
 require 'pry-byebug' if development?
 require 'erb'
 require 'omniauth-coinbase'
-# require 'omniauth'
 require 'coinbase/wallet'
 
 
