@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   include BCrypt
   has_many :payments, :foreign_key => 'sender_id', :class_name => 'Transaction'
   has_many :receipts, :foreign_key => 'receiver_id', :class_name => 'Transaction'
-  has_many :friends, :foreign_key => 'friend_of_id', :class_name => 'Friend'
 
   validates :email, :presence => true, :uniqueness => true
 

@@ -54,12 +54,11 @@ helpers do
     @friends.flatten!
 
     @friends.each do |friend|
-      person = Friend.where(username: friend['username']).first_or_initialize
+      person = User.where(username: friend['username']).first_or_initialize
       person.username      ||= friend['username'].downcase
       person.display_name  ||= friend['display_name']
       person.venmo_account ||= friend['id']
       person.avatar_url    ||= friend['profile_picture_url']
-      person.friend_of_id  ||= current_user.id
       person.save or raise "Friend was not save to database #{person.errors.full_messages.join("\n")}"
     end
   end

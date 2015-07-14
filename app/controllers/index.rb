@@ -31,7 +31,6 @@ end
 
 get '/search' do
   user = User.where(email: params[:query]).first
-  user = Friend.where(email: params[:query]).first if user.nil?
   if user
     redirect "/profile/#{user.email}"
   else
