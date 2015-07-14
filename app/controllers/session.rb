@@ -23,7 +23,7 @@ get '/venmo-oauth/callback' do
     "refresh_token" => response_as_hash['refresh_token'],
     }
   User.add_venmo_account_info(response_as_hash, current_user)
-  add_venmo_friends
+  # add_venmo_friends
   redirect '/'
 end
 

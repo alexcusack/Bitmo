@@ -56,7 +56,6 @@ helpers do
     @friends.each do |friend|
       person = User.where(username: friend['username']).first_or_initialize
       person.username      ||= friend['username'].downcase
-      person.display_name  ||= friend['display_name']
       person.venmo_account ||= friend['id']
       person.avatar_url    ||= friend['profile_picture_url']
       person.save or raise "Friend was not save to database #{person.errors.full_messages.join("\n")}"
