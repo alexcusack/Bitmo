@@ -28,7 +28,6 @@ get '/listener' do
 end
 
 
-
 get '/search' do
   user = User.where(email: params[:query]).first
   if user
