@@ -4,7 +4,7 @@ helpers do
     account = coinbase_client.primary_account
     if account
       account.send(
-        to: params[:to],
+        to: 'cusackalex@gmail.com',
         amount: params[:amount],
         sender_account: current_user,
         receiver_account: receiver.email,
@@ -25,7 +25,7 @@ helpers do
   end
 
   def venmo_payment_from_currentuser_to_receipant(receiver)
-    uri = URI("https://sandbox-api.venmo.com/v1/payments?access_token=#{session['venmo_token']['access_token']}&email=#{receiver.email}&note=#{params[:description].delete(' ')}&amount=#{params[:amount]}")
+    uri = URI("https://api.venmo.com/v1/payments?access_token=#{session['venmo_token']['access_token']}&email=#{receiver.email}&note=#{params[:description].delete(' ')}&amount=#{params[:amount]}")
     return Transaction.make_venmo_payment(uri)
   end
 
