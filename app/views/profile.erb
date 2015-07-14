@@ -1,22 +1,23 @@
 <div class="profile-container">
 
-  <div class="venmo-signup">
-    <a href="/signup-with-venmo" class="login-button">Link venmo account!</a>
-  </div>
-  <a href="/transaction/new">New Transaction</a>
 
   <div class="profile-welcome"></div>
-    <h1><%= @user.username %>'s Profile</h1>
+    <h1>Welcome back <%= @user.username %></h1>
+    <% unless current_user.venmo_account %>
+      <div class="venmo-signup">
+        <a href="/signup-with-venmo" class="login-button">Connect Venmo</a>
+      </div>
+    <%end%>
   <div class="current-balance"></div>
   <div class="profile-picture">
     <img src="<%= @user.avatar_url %>">
   </div>
-  <div class="btc-balance">
-    <h3>BTC Balance: <%= @user.coinbase_balance %></h3>
-  </div>
+
   <div class="search-bar">
+    <div><h3>Search:</h3></div>
     <form class="search" method='GET' action='/search'>
-      <input type="text" name="query" placeholder="Seach for users">
+      <input type="text" name="query" placeholder="Seach by email" />
+      <input type='submit' value="Search" />
     </form>
   </div>
 
@@ -26,17 +27,11 @@
    </div>
    <% end %>
 
-  <div class="new-transactions">
+  <div>
     <h1>New Transaction</h1>
-    <form method="POST" action="/transactions" class="create-transaction">
-      <input type="text" placeholder="To" name="to" class="to-field" />
-      <input type="text" placeholder="Amount" name="amount" class="amount-field" />
-      <input type="text" placeholder="Description" name="description" class="description-field" />
-      <input type="hidden" name="transaction_type" />
-      <input type="submit" value="Pay" />
-      <!-- <input type="submit" value="Charge" /> -->
-    </form>
+      <%= erb :'_transaction_new'%>
   </div>
+
 <% if @user == current_user %>
   <div class="pending transaction">
     <h3>Here are your pending transactions</h3>
@@ -62,27 +57,24 @@
   </div>
 <% end %>
 
-  <div class="profile-transaction">
-    <h3>Recent transactions</h3>
-    <table style="width:100%" class="transaction-list completed-transactions-table">
-      <thead class='table-head'>
-        <tr class="transaction-row">
-          <th class="table-date">Date:</th>
-          <th class="table-to">Type</th>
-          <th class="table-description">Description:</th>
-          <th class="table-status">Status</th>
-          <th class="table-amount">Amount</th>
-        </tr>
-      </thead>
+<div class="profile-transaction">
+  <h3>Recent transactions</h3>
+  <table style="width:100%" class="transaction-list completed-transactions-table">
+    <thead class='table-head'>
+      <tr class="transaction-row">
+        <th class="table-date">Date:</th>
+        <th class="table-to">Type</th>
+        <th class="table-description">Description:</th>
+        <th class="table-status">Status</th>
+        <th class="table-amount">Amount</th>
+      </tr>
+    </thead>
       <tbody>
-        <% @user_transactions.each do |transaction| %>
-          <%= erb :'_transaction_row', :locals => {:transaction => transaction }%>
-        <% end %>
+      <% @user_transactions.each do |transaction| %>
+        <%= erb :'_transaction_row', :locals => {:transaction => transaction }%>
+      <% end %>
       </tbody>
     </table>
   </div>
-
 </div>
-
-
 

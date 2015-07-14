@@ -7,11 +7,8 @@ get '/' do
 end
 
 
-
-
-
 get '/profile/:username' do
-  redirect '/' unless session[:user_id]
+  redirect '/' if current_user == nil
   if current_user.username == params[:username]
     @user = current_user
     get_all_user_transactions
@@ -26,8 +23,15 @@ get '/profile/:username' do
 end
 
 
+get '/listener' do
+ return params[:venmo_challenge]
+end
+
+
+
 get '/search' do
-  user = User.where(username: params[:query]).first
+  user = User.where(email: params[:query]).first
+  user = Friend.where(email: params[:query]).first if user.nil?
   if user
     redirect "/profile/#{user.username}"
   else

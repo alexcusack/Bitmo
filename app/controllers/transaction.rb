@@ -2,25 +2,20 @@ get '/transaction/new' do
   erb :transaction_new
 end
 
-
 post '/transactions' do
-
-  receiver = Friend.find_or_create_by!(email: params[:to]) #TOOD: add email field to friends table
-  make_coinbase_payemt(params)
+  receiver = Friend.find_or_create_by!(email: params[:to])
+  make_coinbase_payemt(params, receiver)
   venmo_transfer_to_initializing_user
-  venmo_payment_from_currentuser_to_receipant(receiver)
-
+  venmo_transaction_log = venmo_payment_from_currentuser_to_receipant(receiver)
 
   transaction = Transaction.new(
     amount: params[:amount],
     description: params[:description],
     sender_id: current_user.id,
     receiver_id: receiver.id,
-    sender_account: "#{current_user.coinbase_account}",
-    receiver_account: "#{receiver.venmo_account}",
     status: "complete",
-    transaction_type: params[:transaction_type],
-    venmo_json_response: response.to_json
+    transaction_type: 'Payment',
+    venmo_json_response: venmo_transaction_log,
   )
 
   if transaction.save

@@ -3,23 +3,23 @@
   margin-left: 5px;
 }
 
-.transaction-row{
-  margin: 10px;
-}
+
 
 .profile-picture{
   float: right;
+  margin-right: 9px;
+  margin-bottom: 5px;
 }
 
 .login-button {
   background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
   background-color:#7892c2;
-  border-radius:20px;
+  border-radius:5px;
   display:inline-block;
   color:#ffffff;
   font-family:Arial;
   font-size:20px;
-  padding:11px 50px;
+  padding:11px 20px;
   text-decoration:none;
 }
 
@@ -46,11 +46,24 @@ tbody:before {
     color: transparent;
 }
 
+.transaction-row:before{
+  content: "-";
+  display: block;
+  line-height: 29.2px;
+  margin: -2px;
+  color: transparent;
+}
+
+.transaction-row{
+  margin: 10px;
+}
+
 
 tr{
   padding:0px;
   width:100%;
   border:1px solid #BAB1B1;
+  margin: 5px;
 }
 
 #not_logged_in_home{
@@ -60,18 +73,13 @@ tr{
   padding-top: 1px;
 }
 
-.row-spacing{
-  height: 4px;
-}
 
 .profile-container{
   margin: 20px auto;
-  /*margin-top: -20px;*/
   background-color: white;
   width: 1000px;
   padding: 0px 20px 20px 20px;
   border: 1px dotted black;
-  /*height: 100vh;*/
 }
 
 .header{
@@ -80,19 +88,11 @@ tr{
   text-align: right;
 }
 
-#signup_field{
-  display: block;
-  margin: 3px;
-}
-
-.login_form{
-  display: block;
-  margin: 3px;
-}
 
 #Sign_out{
   display: inline-block;
   text-align: right;
+  padding-right: 5px;
 }
 
 #home{
@@ -107,20 +107,8 @@ tr{
   padding-top: 10px;
 }
 
-#Sign_out{
- padding-right: 5px;
-}
-
 .container {
   background-color: rgb(234, 234, 234);
-}
-
-#venmo{
-  display: block;
-}
-
-#coinbase{
-  display: block;
 }
 
 body{

@@ -4,6 +4,7 @@ helpers do
     @current_user ||= User.where(id: session[:user_id]).first if session[:user_id]
   end
 
+
   def logged_in?
     !current_user.nil?
   end
