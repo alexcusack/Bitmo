@@ -6,7 +6,7 @@ module AppVenmoAccount
 
     owner = Owner.first
 
-    if owner!
+    if owner
       @venmo_token = AppVenmoAccount.refresh_token if owner.expires_at < Time.now
     end
 
