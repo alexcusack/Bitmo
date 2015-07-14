@@ -1,4 +1,4 @@
-get '/auth/coinbase/callback' do
+get '/auth/coinbase' do
   login_via_coinbase_token
   redirect to('/')
 end
