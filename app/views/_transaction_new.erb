@@ -1,8 +1,8 @@
 <form class='payment-form' method="post" action="/transactions" class="new-payment-form">
-  <input type='text' name='to' placeholder='to email'/>
-  <input type='text' name='amount' placeholder='Amount'/> <span>(USD)</span>
+  <input type='text' name='to' placeholder='Email'/>
+  <input type='text' name='amount' placeholder='Amount (USD)'/>
   <input type='text' name='description' placeholder='Note'/>
-  <input type='text' name='auth' placeholder='Authy#'/>
+  <input type='text' name='auth' placeholder='2 factor auth code'/>
   <input type='submit' value='Send Payment'/>
   <input type="hidden" name="currency" value="USD"/>
 </form>

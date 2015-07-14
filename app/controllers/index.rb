@@ -17,6 +17,10 @@ get '/profile/:username' do
     erb :profile
   else
     @user = User.where(username: params[:username]).first
+    if !@user
+      @errors =  "**We couldn't find a user with that username**"
+      @user = current_user
+    end
     view_profile_transactions
     erb :profile
   end
@@ -31,11 +35,9 @@ end
 
 get '/search' do
   user = User.where(email: params[:query]).first
-  user = Friend.where(email: params[:query]).first if user.nil?
   if user
     redirect "/profile/#{user.username}"
   else
-    @errors = "We didn't find anyone with that username"
-    redirect "profile/#{current_user.username}"
+    redirect "/profile/#{current_user.username}"
   end
 end

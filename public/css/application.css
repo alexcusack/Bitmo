@@ -3,12 +3,18 @@
   margin-left: 5px;
 }
 
-
+.coinbase-signup{
+  text-align: center;
+}
 
 .profile-picture{
-  float: right;
+  float: left;
   margin-right: 9px;
   margin-bottom: 5px;
+}
+
+.clear{
+  clear: both;
 }
 
 .login-button {
@@ -73,6 +79,10 @@ tr{
   padding-top: 1px;
 }
 
+.search-bar{
+  float: right;
+  margin-right: 119px;
+}
 
 .profile-container{
   margin: 20px auto;
