@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
     user = current_user
     user.venmo_auth_token = response['access_token']
     user.venmo_balance    = response['balance']
+    user.venmo_account    = response['user']['id']
     user.save
   end
 
