@@ -3,7 +3,7 @@
 
   <div class="profile-welcome"></div>
     <h1>Welcome back <%= @user.username %></h1>
-    <% unless current_user.venmo_account %>
+    <% unless current_user.venmo_auth_token %>
       <div class="venmo-signup">
         <a href="/signup-with-venmo" class="login-button">Connect Venmo</a>
       </div>
