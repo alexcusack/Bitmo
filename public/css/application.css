@@ -10,11 +10,20 @@
 .profile-picture{
   float: left;
   margin-right: 9px;
-  margin-bottom: 5px;
+  margin-bottom: 17px;
 }
 
 .clear{
   clear: both;
+}
+
+.welcome-header{
+  display: inline-block;
+}
+
+.venmo-signup{
+  display: inline-block;
+  padding-bottom: 10px;
 }
 
 .login-button {

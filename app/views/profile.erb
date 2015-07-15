@@ -1,14 +1,16 @@
 <div class="profile-container">
 
 
-  <div class="profile-welcome"></div>
-    <h1>Welcome back <%= @user.username %></h1>
-    <% unless current_user.venmo_auth_token %>
-      <div class="venmo-signup">
-        <a href="/signup-with-venmo" class="login-button">Connect Venmo</a>
-      </div>
-    <%end%>
-  <div class="current-balance"></div>
+  <div class="profile-welcome">
+    <h1 class='welcome-header'>Welcome back <%= @user.username %></h1>
+  </div>
+
+  <% unless current_user.venmo_auth_token %>
+    <div class="venmo-signup">
+      <a href="/signup-with-venmo" class="login-button">Connect Venmo</a>
+    </div>
+  <%end%>
+
   <div class="profile-picture">
     <img src="<%= @user.avatar_url %>">
   </div>
