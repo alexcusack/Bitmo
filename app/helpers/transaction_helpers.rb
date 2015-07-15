@@ -20,8 +20,12 @@ helpers do
   end
 
   def venmo_transfer_to_initializing_user
+    p current_user
+    p session
     uri = URI("https://api.venmo.com/v1/payments?access_token=#{AppVenmoAccount.venmo_token}&email=#{current_user.email}&note=#{params[:description].delete(' ')}&amount=#{params[:amount]}")
-    return Transaction.make_venmo_payment(uri)
+    p current_user
+    venmo_response = Transaction.make_venmo_payment(uri)
+    p venmo_response
   end
 
   def venmo_payment_from_currentuser_to_receipant(receiver)
