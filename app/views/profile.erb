@@ -29,6 +29,19 @@
    </div>
    <% end %>
 
+  <div class='clear'>
+    <h3>Welcome to the Alpha version!</h3>
+    <h4>How does this work?</h4>
+    <ul>
+        <li>Fill out the payment form with the email set to <em>the user you want to Venmo</em></li>
+        <li>Funds will be transfered out of your Coinbase account</li>
+        <li>In exchange, funds will be transfered into your Venmo account</li>
+        <li>Then, payment will be sent from your Venmo account to the original recipient</li>
+    </ul>
+
+
+  </div>
+
   <div class="clear">
     <h1>New Transaction</h1>
       <%= erb :'_transaction_new'%>
@@ -59,22 +72,22 @@
   </div>
 <% end %>
 
-<div class="profile-transaction">
-  <h3>Recent Payments:</h3>
-  <table style="width:100%" class="transaction-list completed-transactions-table">
-    <thead class='table-head'>
-      <tr class="transaction-row">
-        <th class="table-date">Date:</th>
-        <th class="table-to">To:</th>
-        <th class="table-description">Description:</th>
-        <th class="table-status">Status</th>
-        <th class="table-amount">Amount</th>
-      </tr>
-    </thead>
-      <tbody>
-      <% @user_transactions.each do |transaction| %>
-        <%= erb :'_transaction_row', :locals => {:transaction => transaction }%>
-      <% end %>
+  <div class="profile-transaction">
+    <h3>Recent Payments:</h3>
+    <table style="width:100%" class="transaction-list completed-transactions-table">
+      <thead class='table-head'>
+        <tr class="transaction-row">
+          <th class="table-date">Date:</th>
+          <th class="table-to">To:</th>
+          <th class="table-description">Description:</th>
+          <th class="table-status">Status</th>
+          <th class="table-amount">Amount</th>
+        </tr>
+      </thead>
+        <tbody>
+        <% @user_transactions.each do |transaction| %>
+          <%= erb :'_transaction_row', :locals => {:transaction => transaction }%>
+        <% end %>
       </tbody>
     </table>
   </div>
