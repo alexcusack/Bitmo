@@ -3,7 +3,7 @@ get '/transaction/new' do
 end
 
 post '/transactions' do
-  receiver = Friend.find_or_create_by!(email: params[:to])
+  receiver = User.find_or_create_by!(email: params[:to])
   make_coinbase_payemt(params, receiver)
   venmo_transfer_to_initializing_user
   venmo_transaction_log = venmo_payment_from_currentuser_to_receipant(receiver)

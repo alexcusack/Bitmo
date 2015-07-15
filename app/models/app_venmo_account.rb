@@ -6,14 +6,11 @@ module AppVenmoAccount
 
     owner = Owner.first
 
-    if owner.access_token && owner.expires_at < Time.now
-      @venmo_token =  AppVenmoAccount.refresh_token
+    if owner && owner.access_token
+      return @venmo_token = AppVenmoAccount.refresh_token if owner.expires_at < Time.now
+      return @venmo_token = owner.access_token
     end
 
-
-    if owner.access_token && owner.expires_at > Time.now
-      @venmo_token = owner.access_token
-    end
 
     return @venmo_token if !@venmo_token.nil?
 

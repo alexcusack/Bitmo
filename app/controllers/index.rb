@@ -1,22 +1,22 @@
 get '/' do
   if logged_in?
-    redirect "/profile/#{current_user.username}"
+    redirect "/profile/#{current_user.email}"
   else
     erb :index
   end
 end
 
 
-get '/profile/:username' do
+get '/profile/:email' do
   redirect '/' if current_user == nil
-  if current_user.username == params[:username]
+  if current_user.email == params[:email]
     @user = current_user
     get_all_user_transactions
     get_pending_transaction
     chronological_sort_transactions
     erb :profile
   else
-    @user = User.where(username: params[:username]).first
+    @user = User.where(email: params[:email]).first
     if !@user
       @errors =  "**We couldn't find a user with that username**"
       @user = current_user
@@ -27,17 +27,11 @@ get '/profile/:username' do
 end
 
 
-get '/listener' do
- return params[:venmo_challenge]
-end
-
-
-
 get '/search' do
   user = User.where(email: params[:query]).first
   if user
-    redirect "/profile/#{user.username}"
+    redirect "/profile/#{user.email}"
   else
-    redirect "/profile/#{current_user.username}"
+    redirect "profile/#{current_user.email}"
   end
 end

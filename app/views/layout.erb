@@ -15,9 +15,6 @@
   <body>
     <div class="header">
       <% if current_user %>
-        <div id="user">
-          <button><a href="/"><%= current_user.username.upcase %></a></button>
-        </div>
         <div id="Sign_out">
           <button><a href="/logout">Sign out</a></button>
         </div>

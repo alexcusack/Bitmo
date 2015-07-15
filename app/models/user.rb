@@ -4,9 +4,7 @@ class User < ActiveRecord::Base
   include BCrypt
   has_many :payments, :foreign_key => 'sender_id', :class_name => 'Transaction'
   has_many :receipts, :foreign_key => 'receiver_id', :class_name => 'Transaction'
-  has_many :friends, :foreign_key => 'friend_of_id', :class_name => 'Friend'
 
-  validates :username, :uniqueness => true, length: { minimum: 2 }
   validates :email, :presence => true, :uniqueness => true
 
 
@@ -29,9 +27,10 @@ class User < ActiveRecord::Base
   end
 
   def self.add_venmo_account_info(response, current_user)
-    user =  current_user
-    user.venmo_account = response['user']['id']
-    user.venmo_balance = response['balance']
+    user = current_user
+    user.venmo_auth_token = response['access_token']
+    user.venmo_balance    = response['balance']
+    user.venmo_account    = response['user']['id']
     user.save
   end
 
