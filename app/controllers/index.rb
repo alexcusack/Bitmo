@@ -23,11 +23,6 @@ get '/profile/:email' do
 end
 
 
-get '/listener' do
- return params[:venmo_challenge]
-end
-
-
 get '/search' do
   user = User.where(email: params[:query]).first
   if user
