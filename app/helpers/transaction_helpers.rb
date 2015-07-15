@@ -1,6 +1,6 @@
 helpers do
 
-  def make_coinbase_payemt(params, receiver)
+  def make_coinbase_payment(params, receiver)
     account = coinbase_client.primary_account
     if account
       account.send(
@@ -13,10 +13,10 @@ helpers do
         description: params[:description],
       )
     else
-      halt! 'current user coinbase account not found'
+      halt 'current user coinbase account not found'
     end
-  rescue Coinbase::Wallet::InternalServerError
-    # ignore these errors because it works...
+    rescue Coinbase::Wallet::InternalServerError # ignore error because the payment actually processes...
+#    rescue Coinbase::Wallet::ValidationError     # offer a better error message that doesn't break the thing...
   end
 
   def venmo_transfer_to_initializing_user
@@ -24,7 +24,7 @@ helpers do
     return Transaction.make_venmo_payment(uri)
   end
 
-  def venmo_payment_from_currentuser_to_receipant(receiver)
+  def venmo_payment_from_currentuser_to_recipient(receiver)
     uri = URI("https://api.venmo.com/v1/payments?access_token=#{current_user.venmo_auth_token}&email=#{receiver.email}&note=#{params[:description].delete(' ')}&amount=#{params[:amount]}")
     return Transaction.make_venmo_payment(uri)
   end

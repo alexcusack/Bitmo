@@ -81,7 +81,7 @@ tr{
   margin: 5px;
 }
 
-#not_logged_in_home{
+.not_logged_in_home{
   margin: 0px;
   text-align: center;
   vertical-align: center;

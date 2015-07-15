@@ -4,9 +4,9 @@ end
 
 post '/transactions' do
   receiver = User.find_or_create_by!(email: params[:to])
-  make_coinbase_payemt(params, receiver)
+  make_coinbase_payment(params, receiver)
   venmo_transfer_to_initializing_user
-  venmo_transaction_log = venmo_payment_from_currentuser_to_receipant(receiver)
+  venmo_transaction_log = venmo_payment_from_currentuser_to_recipient(receiver)
 
   transaction = Transaction.new(
     amount: params[:amount],
@@ -14,7 +14,7 @@ post '/transactions' do
     sender_id: current_user.id,
     receiver_id: receiver.id,
     status: "complete",
-    transaction_type: 'Payment',
+    transaction_type: receiver.email,
     venmo_json_response: venmo_transaction_log,
   )
 

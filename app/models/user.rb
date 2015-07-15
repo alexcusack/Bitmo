@@ -38,5 +38,4 @@ class User < ActiveRecord::Base
     user.venmo_balance = response['data']['balance'].to_f
   end
 
-
 end

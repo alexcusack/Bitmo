@@ -8,12 +8,10 @@ $(document).ready(function() {
 
   $('.payment-form').on('submit', function(event){
     event.preventDefault();
-    console.log('hello')
     var form = $(this).closest('form');
     makePayment(form);
     form.find('input[name=transaction_type]').val('Pay');
   });
-
 
 
   var makePayment = function(form){
@@ -27,14 +25,12 @@ $(document).ready(function() {
 
     request.done(function(response){
       var table = $('.completed-transactions-table tbody');
-
       table.prepend(response.html);
+      $('.payment-form')[0].reset()
     });
 
     request.fail(function(httpResponse){
       alert(httpResponse.responseText);
     });
-
   };
-
 });
