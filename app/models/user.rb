@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :payments, :foreign_key => 'sender_id', :class_name => 'Transaction'
   has_many :receipts, :foreign_key => 'receiver_id', :class_name => 'Transaction'
 
-  validates :email, :presence => true, :uniqueness => true
+  validates :email, :presence => true
 
 
   def self.authenticate(username, entered_password)
@@ -37,6 +37,5 @@ class User < ActiveRecord::Base
   def self.update_user_venmo_balance(user, response)
     user.venmo_balance = response['data']['balance'].to_f
   end
-
 
 end
