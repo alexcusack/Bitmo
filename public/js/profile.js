@@ -33,4 +33,10 @@ $(document).ready(function() {
       alert(httpResponse.responseText);
     });
   };
+
+  $('.login-button').on('click', function(event){
+   event.preventDefault();
+   alert("Unfortunately Venmo just revoked our API access, so we can't link your account anymore :( ");
+  });
+
 });
