@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+
+
   $('.payment-form').on('submit', function(event){
     event.preventDefault();
     var form = $(this).closest('form');
@@ -9,10 +11,11 @@ $(document).ready(function() {
 
 
   var makePayment = function(form){
+    debugger
     var request = $.ajax({
       url: form.attr('action'),
       type: form.attr('method'),
-      data: $("form.payment-form input[type=text]"),
+      data: form.serialize(),
       dataType: 'JSON',
     });
 
