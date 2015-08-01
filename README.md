@@ -11,7 +11,7 @@
 + Browse other user profiles
 + Script to auth Venmo account on behalf of the app - it's cool! Check it out! [Venmo Auth Script](https://github.com/cusackalex/Bitmo/blob/master/app/models/app_venmo_account.rb)
 
-## Future Plan:
+## Future Plans:
 + Add additional recipient endpoints (Paypal, SquareCash)
 + Include live USD/BTC exchange rate
 + Display user BTC and Venmo account balances on profile
