@@ -3,5 +3,5 @@
   <td><span class="transaction-information sender_id"><%= transaction.transaction_type %></span></td>
   <td><span class="transaction-information description"><%= transaction.description %></span></td>
   <td><span class="transaction-information status"><%= transaction.status %></span></td>
-  <td><span class="transaction-information amount">$<%= transaction.amount.to_f/100 %></span></td>
+  <td><span class="transaction-information amount">$<%= sprintf "%.2f", transaction.amount/100 %></span></td>
 </tr>
