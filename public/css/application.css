@@ -26,32 +26,6 @@
   padding-bottom: 10px;
 }
 
-/*.login-button {
-  background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
-  background-color:#7892c2;
-  border-radius:5px;
-  display:inline-block;
-  color:#ffffff;
-  font-family:Arial;
-  font-size:20px;
-  padding:11px 20px;
-  text-decoration:none;
-}
-
-.login-button:hover {
-  background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
-  background-color:#476e9e;
-}
-
-.login-button:active {
-  position:relative;
-  top:1px;
-}*/
-
-.display-inline{
-
-}
-
 th{
     text-align: left;
 }
@@ -84,13 +58,6 @@ tr{
   margin: 5px;
 }
 
-.not_logged_in_home{
-  margin: 0px;
-  text-align: center;
-  vertical-align: center;
-  padding-top: 1px;
-}
-
 
 .input{
   display: inline-block;
@@ -110,26 +77,6 @@ tr{
   border: 1px dotted black;
 }
 
-.header{
-  background-color: rgb(33, 137, 168);
-  height: 50px;
-  text-align: right;
-}
-
-
-#Sign_out{
-  display: inline-block;
-  text-align: right;
-  padding-right: 5px;
-}
-
-#home{
-  display: inline-block;
-  float: left;
-  padding-top: 10px;
-  padding-left: 5px;
-}
-
 #user{
   display: inline-block;
   padding-top: 10px;
@@ -142,3 +89,17 @@ tr{
 body{
   background-color: rgb(234, 234, 234);
 }
+
+.github{
+  float: left;
+  padding-left: 10px;
+}
+
+.card .card-action a {
+  color: white;
+}
+
+.header{
+  background-color: #29b6f6;
+}
+

@@ -4,8 +4,9 @@
 
   <link rel="stylesheet" href="/css/normalize.css">
 
-  <link rel="stylesheet" href="/css/application.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/application.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/js/application.js"></script>
@@ -14,23 +15,23 @@
   <title></title>
 </head>
   <body>
-    <div class="header">
-      <% if current_user %>
-         <div id="Sign_out">
-          <button><a href="/">Home</a></button>
-        </div>
-        <div id="Sign_out">
-          <button><a href="/logout">Sign out</a></button>
-        </div>
-      <% else %>
-        <div class="not_logged_in_home">
-          <h3>Welcome to Bitmo(Alpha)</h3>
-        </div>
-      <% end  %>
-    </div>
-
+    <nav class="header">
+      <div class="nav-wrapper">
+        <ul><li><a class="github" href="https://github.com/cusackalex/bitmo">Checkout the Github!</a></li></ul>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <% if current_user %>
+            <li><a href="/">Home</a></li>
+            <li><a href="/logout">Sign out</a></li>
+          <% else %>
+            <li><a href="#">Welcome to bitmo!</a></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
     <div class="container">
       <%= yield %>
     </div>
   </body>
 </html>
+
+

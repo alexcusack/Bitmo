@@ -1,10 +1,6 @@
 $(document).ready(function() {
 
 
-  $('.payment-form input[type=submit]').on('click', function(event){
-    var submitButton = $(this);
-    submitButton.closest('form').find('input[name=transaction_type]').val(submitButton.val());
-  });
 
   $('.payment-form').on('submit', function(event){
     event.preventDefault();
@@ -15,7 +11,7 @@ $(document).ready(function() {
 
 
   var makePayment = function(form){
-
+    debugger
     var request = $.ajax({
       url: form.attr('action'),
       type: form.attr('method'),
