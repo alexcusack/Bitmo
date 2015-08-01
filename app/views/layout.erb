@@ -4,8 +4,8 @@
 
   <link rel="stylesheet" href="/css/normalize.css">
 
-  <link rel="stylesheet" href="/css/application.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/application.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/js/application.js"></script>
@@ -15,20 +15,20 @@
 </head>
   <body>
     <div class="header">
-      <% if current_user %>
-         <div id="Sign_out">
-         <a href="/" class="waves-effect waves-light btn">Home</a>
-        </div>
-        <div id="Sign_out">
-         <a href="/logout" class="waves-effect waves-light btn">Sign out</a>
-        </div>
+    <a href="https://github.com/cusackalex/bitmo" class="git-hub waves-effect waves-light btn"></i>Checkout the Github!</a>
+    <% if current_user %>
+      <div id="Sign_out">
+        <a href="/" class="waves-effect waves-light btn">Home</a>
+      </div>
+      <div id="Sign_out">
+        <a href="/logout" class="waves-effect waves-light btn">Sign out</a>
+      </div>
       <% else %>
-        <div class="not_logged_in_home">
-          <h5>Welcome to Bitmo(Alpha)</h5>
-        </div>
+      <div class="not_logged_in_home">
+        <h5>Welcome to Bitmo(Alpha)</h5>
+      </div>
       <% end  %>
     </div>
-
     <div class="container">
       <%= yield %>
     </div>

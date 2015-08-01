@@ -26,31 +26,6 @@
   padding-bottom: 10px;
 }
 
-/*.login-button {
-  background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
-  background-color:#7892c2;
-  border-radius:5px;
-  display:inline-block;
-  color:#ffffff;
-  font-family:Arial;
-  font-size:20px;
-  padding:11px 20px;
-  text-decoration:none;
-}
-
-.login-button:hover {
-  background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
-  background-color:#476e9e;
-}
-
-.login-button:active {
-  position:relative;
-  top:1px;
-}*/
-
-.display-inline{
-
-}
 
 th{
     text-align: left;
@@ -111,7 +86,7 @@ tr{
 }
 
 .header{
-  background-color: rgb(33, 137, 168);
+  background-color: #29b6f6 ;
   height: 50px;
   text-align: right;
 }
@@ -141,4 +116,12 @@ tr{
 
 body{
   background-color: rgb(234, 234, 234);
+}
+
+.git-hub{
+  float: left;
+}
+
+.card .card-action a {
+  color: white;
 }

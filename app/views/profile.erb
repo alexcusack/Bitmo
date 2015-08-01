@@ -22,7 +22,7 @@
           <div class="card-action">
             <% unless current_user.venmo_auth_token %>
               <div class="venmo-signup">
-                <a href="/signup-with-venmo" class="login-button waves-effect waves-light btn"><i class="material-icons left"></i>Connect Venmo</a>
+              <a href="/signup-with-venmo" class="login-button waves-effect waves-light btn">Link Venmo</a>
               </div>
             <%end%>
           </div>
@@ -31,21 +31,11 @@
     </div>
   </div>
 
-
-
-
-
-
-
-
   <% if @errors %>
    <div class="errors">
       <p><%= p @errors %></p>
    </div>
    <% end %>
-
-
-
   <div class="clear">
     <h3>New Transaction</h3>
       <%= erb :'_transaction_new'%>
