@@ -58,13 +58,6 @@ tr{
   margin: 5px;
 }
 
-.not_logged_in_home{
-  margin: 0px;
-  text-align: center;
-  vertical-align: center;
-  padding-top: 1px;
-}
-
 
 .input{
   display: inline-block;
@@ -84,26 +77,6 @@ tr{
   border: 1px dotted black;
 }
 
-.header{
-  background-color: #29b6f6 ;
-  height: 50px;
-  text-align: right;
-}
-
-
-#Sign_out{
-  display: inline-block;
-  text-align: right;
-  padding-right: 5px;
-}
-
-#home{
-  display: inline-block;
-  float: left;
-  padding-top: 10px;
-  padding-left: 5px;
-}
-
 #user{
   display: inline-block;
   padding-top: 10px;
@@ -117,10 +90,16 @@ body{
   background-color: rgb(234, 234, 234);
 }
 
-.git-hub{
+.github{
   float: left;
+  padding-left: 10px;
 }
 
 .card .card-action a {
   color: white;
 }
+
+.header{
+  background-color: #29b6f6;
+}
+
