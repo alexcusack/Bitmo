@@ -17,6 +17,7 @@ post '/transactions' do
     # venmo_json_response: venmo_transaction_log,
   )
 
+
   if transaction.save
     content_type :json
     html = erb :'_transaction_row', layout: false, locals: {transaction: transaction}
