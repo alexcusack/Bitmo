@@ -98,3 +98,21 @@ body{
 .card .card-action a {
   color: white;
 }
+
+.index-cointainer{
+  position: absolute;
+  top: 120px;
+  bottom: 0;
+  left: 300px;
+  right: 300px;
+
+  margin: auto;
+}
+
+
+
+.container .container-index .row {
+
+    margin-left: -7.75rem;
+    margin-right: -39.75rem;
+}
