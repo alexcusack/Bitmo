@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 
-  <link rel="stylesheet" href="/css/normalize.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/css/application.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -17,20 +17,22 @@
   <body>
     <nav class="header">
       <div class="nav-wrapper">
-        <ul><li><a class="github" href="https://github.com/cusackalex/bitmo">Checkout the Github!</a></li></ul>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <% if current_user %>
-            <li><a href="/">Home</a></li>
-            <li><a href="/logout">Sign out</a></li>
-          <% else %>
-            <li><a href="#">Welcome to bitmo!</a></li>
-          <% end %>
-        </ul>
+        <div class="container">
+          <ul><li><a class="github" href="https://github.com/cusackalex/bitmo">Checkout the Github!</a></li></ul>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <% if current_user %>
+              <li><a href="/">Home</a></li>
+              <li><a href="/logout">Sign out</a></li>
+            <% else %>
+              <li><a href="#">Welcome to PayWithBits!</a></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </nav>
-    <div class="container">
-      <%= yield %>
-    </div>
+
+    <%= yield %>
+
   </body>
 </html>
 

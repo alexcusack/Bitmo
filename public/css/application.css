@@ -82,12 +82,10 @@ tr{
   padding-top: 10px;
 }
 
-.container {
-  background-color: rgb(234, 234, 234);
-}
+
 
 body{
-  background-color: rgb(234, 234, 234);
+  background-color: #FAFAFA;
 }
 
 .github{
@@ -99,20 +97,97 @@ body{
   color: white;
 }
 
-.index-cointainer{
+/* Vivek */
+
+.header{
+  background-color: #1D75B7;
+}
+
+.coinbase-signup {
+  background: #FFF;
+  padding: 50px 0px;
+}
+
+.coinbase-signup h4 {
+  position: relative;
+  text-align: center;
+}
+
+.coinbase-signup h4 span {
+  background: #FFF;
+  padding: 0 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.coinbase-signup h4:before {
+  background: #ddd;
+  content: "";
+  display: block;
+  height: 1px;
   position: absolute;
-  top: 120px;
-  bottom: 0;
-  left: 300px;
-  right: 300px;
-
-  margin: auto;
+    top: 50%;
+  width: 100%;
+}
+.coinbase-signup h4:before {
+  left: 0;
 }
 
+/*.clear li {
 
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  line-height: 20px;
+}*/
 
-.container .container-index .row {
-
-    margin-left: -7.75rem;
-    margin-right: -39.75rem;
+.clear {
+  padding: 50px 0px;
 }
+
+.clear li {
+  height: 44px;
+}
+
+.clear li .fa {
+  color: rgb(1, 104, 187);
+}
+
+.titleborder {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  border-top: 1px solid #eeeeee;
+  margin-top: 8px;
+}
+
+.clear h4 {
+  position: relative;
+  text-align: center;
+}
+
+.clear h4 span {
+  background: #FAFAFA;
+  padding: 0 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.clear h4:before {
+  background: #ddd;
+  content: "";
+  display: block;
+  height: 1px;
+  position: absolute;
+    top: 50%;
+  width: 100%;
+}
+.clear h4:before {
+  left: 0;
+}
+
+.btn {
+  background-color: rgb(43, 113, 177);
+}
+
